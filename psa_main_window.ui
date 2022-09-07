@@ -1,0 +1,1517 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>psa_main_window</class>
+ <widget class="QMainWindow" name="psa_main_window">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>800</width>
+    <height>480</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>PSA App</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QMainWindow{
+	border: none;
+	background-color: #111111;
+}
+
+QScrollBar:vertical {
+	/*margin: 5px;*/
+	background: rgb(57, 57, 57);
+	padding: 5px;
+	width: 18px;
+	border-radius: 5px
+}
+
+QScrollBar::handle:vertical {
+	background-color: gray;
+	border-radius: 4px;
+}
+
+QScrollBar::add-line:vertical {
+height: 0px;
+}
+
+QScrollBar::sub-line:vertical {
+height: 0px;
+background: rgb(57, 57, 57);
+}
+
+QScrollBar::sub-page:vertical {
+height: 0px;
+background: rgb(57, 57, 57);
+}
+
+QScrollBar::add-page:vertical{
+height: 0px;
+background: rgb(57, 57, 57);
+}</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <property name="styleSheet">
+    <string notr="true">color: white;
+
+QWidget
+{
+	background-color: #111111;
+}</string>
+   </property>
+   <widget class="QLabel" name="fuel_label">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>410</y>
+      <width>60</width>
+      <height>60</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap resource="psa-resources.qrc">:/symbols/icons/fuel.png</pixmap>
+    </property>
+    <property name="scaledContents">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="tachometer_window" name="rpm_widget" native="true">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>800</width>
+      <height>400</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="psa_music_window" name="music_widget" native="true">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>800</width>
+      <height>400</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="psa_radio_window" name="radio_widget" native="true">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>800</width>
+      <height>400</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="right_text_label">
+    <property name="geometry">
+     <rect>
+      <x>560</x>
+      <y>400</y>
+      <width>240</width>
+      <height>80</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>DSEG14 Classic</family>
+      <pointsize>25</pointsize>
+      <bold>false</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>Otvoreni</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QSlider" name="speed_slider">
+    <property name="geometry">
+     <rect>
+      <x>180</x>
+      <y>320</y>
+      <width>441</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="maximum">
+     <number>200</number>
+    </property>
+    <property name="value">
+     <number>0</number>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Horizontal</enum>
+    </property>
+    <property name="invertedAppearance">
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QSlider" name="verticalSlider">
+    <property name="geometry">
+     <rect>
+      <x>680</x>
+      <y>20</y>
+      <width>50</width>
+      <height>340</height>
+     </rect>
+    </property>
+    <property name="maximum">
+     <number>7000</number>
+    </property>
+    <property name="value">
+     <number>0</number>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Vertical</enum>
+    </property>
+    <property name="invertedAppearance">
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="left_text_label">
+    <property name="geometry">
+     <rect>
+      <x>60</x>
+      <y>400</y>
+      <width>101</width>
+      <height>80</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>DSEG7 Classic</family>
+      <pointsize>30</pointsize>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>!!.!</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="left_text_unit_label">
+    <property name="geometry">
+     <rect>
+      <x>160</x>
+      <y>400</y>
+      <width>71</width>
+      <height>81</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>DSEG14 Classic</family>
+      <pointsize>12</pointsize>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string notr="true">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;!l /&lt;/p&gt;&lt;p&gt;100km&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="time_label">
+    <property name="geometry">
+     <rect>
+      <x>679</x>
+      <y>0</y>
+      <width>120</width>
+      <height>40</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>PSA Groupe HMI Sans CS</family>
+      <pointsize>28</pointsize>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>12:34</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="psa_badapple_window" name="badapple_widget" native="true">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>800</width>
+      <height>400</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="badapple_button">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>41</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgba(255, 255, 255,0);
+border: none;</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="icon">
+     <iconset resource="psa-resources.qrc">
+      <normaloff>:/memes/memes/apple.png</normaloff>:/memes/memes/apple.png</iconset>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>30</width>
+      <height>30</height>
+     </size>
+    </property>
+   </widget>
+   <widget class="QGroupBox" name="door_alerts_box">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>295</x>
+      <y>80</y>
+      <width>210</width>
+      <height>280</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QGroupBox{
+	background-color: rgb(38, 48, 52);
+border: none;
+border-radius: 20px;
+}
+</string>
+    </property>
+    <property name="title">
+     <string/>
+    </property>
+    <property name="flat">
+     <bool>true</bool>
+    </property>
+    <widget class="QLabel" name="doors_base">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>40</y>
+       <width>170</width>
+       <height>210</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="pixmap">
+      <pixmap resource="psa-resources.qrc">:/doors/doors/base.png</pixmap>
+     </property>
+     <property name="scaledContents">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QLabel" name="doors_boot">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>40</y>
+       <width>170</width>
+       <height>210</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="pixmap">
+      <pixmap resource="psa-resources.qrc">:/doors/doors/boot.png</pixmap>
+     </property>
+     <property name="scaledContents">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QLabel" name="doors_front_left">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>40</y>
+       <width>170</width>
+       <height>210</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="pixmap">
+      <pixmap resource="psa-resources.qrc">:/doors/doors/front_left.png</pixmap>
+     </property>
+     <property name="scaledContents">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QLabel" name="doors_front_right">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>40</y>
+       <width>170</width>
+       <height>210</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="pixmap">
+      <pixmap resource="psa-resources.qrc">:/doors/doors/front_right.png</pixmap>
+     </property>
+     <property name="scaledContents">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QLabel" name="doors_rear_left">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>40</y>
+       <width>170</width>
+       <height>210</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="pixmap">
+      <pixmap resource="psa-resources.qrc">:/doors/doors/rear_left.png</pixmap>
+     </property>
+     <property name="scaledContents">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QLabel" name="doors_rear_right">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>40</y>
+       <width>170</width>
+       <height>210</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="pixmap">
+      <pixmap resource="psa-resources.qrc">:/doors/doors/rear_right.png</pixmap>
+     </property>
+     <property name="scaledContents">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QLabel" name="doors_hood">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>37</y>
+       <width>170</width>
+       <height>210</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="pixmap">
+      <pixmap resource="psa-resources.qrc">:/doors/doors/hood.png</pixmap>
+     </property>
+     <property name="scaledContents">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QGroupBox" name="radio_volume_box">
+    <property name="geometry">
+     <rect>
+      <x>230</x>
+      <y>10</y>
+      <width>340</width>
+      <height>60</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QGroupBox{
+	background-color: rgb(38, 48, 52);
+border: none;
+border-radius: 20px;
+}
+</string>
+    </property>
+    <widget class="QSlider" name="radio_volume_slider">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>10</y>
+       <width>260</width>
+       <height>40</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">
+
+QSlider::groove:horizontal {
+    border: 1px solid #999999;
+    height: 8px; /* the groove expands to the size of the slider by default. by giving it a height, it has a fixed size */
+    background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #B1B1B1, stop:1 rgb(0, 255, 255));
+    margin: 12px 12px;
+	border-radius: 4px;
+}
+
+QSlider::handle:horizontal {
+   /* background: qlineargradient(x1:0, y1:0, x2:1, y2:1, stop:0 rgb(0, 170, 255), stop:1 rgb(170, 85, 255));*/
+	
+	background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.313, fy:0.226818, stop:0.197861 rgba(109, 109, 255, 255), stop:1 rgba(56,56, 255, 255));
+	/*background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.313, fy:0.226818, stop:0.197861 rgba(155, 155, 155, 255), stop:1 rgba(53, 53, 255, 255));*/
+    border: 1px solid rgba(15,15, 255, 255);
+    width: 18px;
+	height: 20px;
+	line-height: 20px;
+	margin-left: -5px;
+	margin-right: -5px;
+    margin-top: -6px;
+	margin-bottom: -6px;
+	border-radius: 10px;
+}</string>
+     </property>
+     <property name="maximum">
+      <number>30</number>
+     </property>
+     <property name="value">
+      <number>0</number>
+     </property>
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="tickPosition">
+      <enum>QSlider::NoTicks</enum>
+     </property>
+    </widget>
+    <widget class="QLabel" name="radio_volume_label">
+     <property name="geometry">
+      <rect>
+       <x>280</x>
+       <y>10</y>
+       <width>55</width>
+       <height>40</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>PSA Groupe HMI Sans CS</family>
+       <pointsize>23</pointsize>
+       <bold>false</bold>
+       <kerning>true</kerning>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QLabel{
+	color: rgb(255, 255, 255);
+}</string>
+     </property>
+     <property name="text">
+      <string>0</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QLabel" name="mute_label">
+    <property name="geometry">
+     <rect>
+      <x>640</x>
+      <y>0</y>
+      <width>40</width>
+      <height>40</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap resource="psa-resources.qrc">:/symbols/icons/mute.png</pixmap>
+    </property>
+    <property name="scaledContents">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QGroupBox" name="bottom_buttons_group">
+    <property name="geometry">
+     <rect>
+      <x>240</x>
+      <y>400</y>
+      <width>320</width>
+      <height>80</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QGroupBox{
+	border: none;
+	border-radius: 20px;
+	background-color: #829aff;
+}</string>
+    </property>
+    <property name="title">
+     <string/>
+    </property>
+    <property name="flat">
+     <bool>true</bool>
+    </property>
+    <widget class="QPushButton" name="android_auto_button">
+     <property name="geometry">
+      <rect>
+       <x>240</x>
+       <y>0</y>
+       <width>80</width>
+       <height>80</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton {
+    border: none;
+	outline: none;
+	margin: 2px;
+	border-radius: 20px;
+	background-color: rgba(255, 255, 255, 0);
+
+	
+
+}
+
+QPushButton:pressed {
+	margin: 5px;
+    border: none;
+	outline: none;
+}
+
+QPushButton:checked {	
+	margin: 2px;
+    border: none;
+	outline: none;
+	
+		background-color: qlineargradient(spread:pad, x1:1, y1:1, x2:0, y2:0, stop:0 rgba(0, 0, 0, 0), stop:1 rgba(0, 0, 255, 255));
+
+/*	background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.313, fy:0.226818, stop:0.197861 rgba(155, 155, 155, 255), stop:1 rgba(53, 53, 255, 255));*/
+	/*background-color: #2a53ff;*/
+}
+
+QPushButton:unchecked {
+	margin: 2px;
+    border: none;
+	outline: none;
+}
+
+QPushButton:selected{
+	margin: 2px;
+	border: none;
+	outline: none;
+}
+
+QPushButton:focus{
+	margin: 2px;
+	position: absolute;
+    border: none;
+	outline: none;
+	top: 0px;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+}
+QPushButton:hover{
+	margin: 2px;
+	position: absolute;
+    border: none;
+	outline: none;
+	top: 0px;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+}
+
+
+QPushButton:default {
+	position: absolute;
+    border-width: 0px;
+	outline: none;
+	top: 0px;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+}</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="icon">
+      <iconset resource="psa-resources.qrc">
+       <normaloff>:/images/icons/aauto-vector.svg</normaloff>:/images/icons/aauto-vector.svg</iconset>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>48</width>
+       <height>48</height>
+      </size>
+     </property>
+     <property name="flat">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="music_button">
+     <property name="geometry">
+      <rect>
+       <x>160</x>
+       <y>0</y>
+       <width>80</width>
+       <height>80</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton {
+    border: none;
+	outline: none;
+	margin: 2px;
+	border-radius: 20px;
+	background-color: rgba(255, 255, 255, 0);
+
+	
+
+}
+
+QPushButton:pressed {
+	margin: 5px;
+    border: none;
+	outline: none;
+}
+
+QPushButton:checked {	
+	margin: 2px;
+    border: none;
+	outline: none;
+	
+		background-color: qlineargradient(spread:pad, x1:1, y1:1, x2:0, y2:0, stop:0 rgba(0, 0, 0, 0), stop:1 rgba(0, 0, 255, 255));
+
+/*	background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.313, fy:0.226818, stop:0.197861 rgba(155, 155, 155, 255), stop:1 rgba(53, 53, 255, 255));*/
+	/*background-color: #2a53ff;*/
+}
+
+QPushButton:unchecked {
+	margin: 2px;
+    border: none;
+	outline: none;
+}
+
+QPushButton:selected{
+	margin: 2px;
+	border: none;
+	outline: none;
+}
+
+QPushButton:focus{
+	margin: 2px;
+	position: absolute;
+    border: none;
+	outline: none;
+	top: 0px;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+}
+QPushButton:hover{
+	margin: 2px;
+	position: absolute;
+    border: none;
+	outline: none;
+	top: 0px;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+}
+
+
+QPushButton:default {
+	position: absolute;
+    border-width: 0px;
+	outline: none;
+	top: 0px;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+}</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="icon">
+      <iconset resource="psa-resources.qrc">
+       <normaloff>:/images/icons/music-solid.svg</normaloff>:/images/icons/music-solid.svg</iconset>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>48</width>
+       <height>48</height>
+      </size>
+     </property>
+     <property name="checkable">
+      <bool>true</bool>
+     </property>
+     <property name="checked">
+      <bool>false</bool>
+     </property>
+     <property name="autoExclusive">
+      <bool>false</bool>
+     </property>
+     <property name="flat">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="radio_button">
+     <property name="geometry">
+      <rect>
+       <x>80</x>
+       <y>0</y>
+       <width>80</width>
+       <height>80</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton {
+    border: none;
+	outline: none;
+	margin: 2px;
+	border-radius: 20px;
+	background-color: rgba(255, 255, 255, 0);
+
+	
+
+}
+
+QPushButton:pressed {
+	margin: 5px;
+    border: none;
+	outline: none;
+}
+
+QPushButton:checked {	
+	margin: 2px;
+    border: none;
+	outline: none;
+	
+		background-color: qlineargradient(spread:pad, x1:1, y1:1, x2:0, y2:0, stop:0 rgba(0, 0, 0, 0), stop:1 rgba(0, 0, 255, 255));
+
+/*	background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.313, fy:0.226818, stop:0.197861 rgba(155, 155, 155, 255), stop:1 rgba(53, 53, 255, 255));*/
+	/*background-color: #2a53ff;*/
+}
+
+QPushButton:unchecked {
+	margin: 2px;
+    border: none;
+	outline: none;
+}
+
+QPushButton:selected{
+	margin: 2px;
+	border: none;
+	outline: none;
+}
+
+QPushButton:focus{
+	margin: 2px;
+	position: absolute;
+    border: none;
+	outline: none;
+	top: 0px;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+}
+QPushButton:hover{
+	margin: 2px;
+	position: absolute;
+    border: none;
+	outline: none;
+	top: 0px;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+}
+
+
+QPushButton:default {
+	position: absolute;
+    border-width: 0px;
+	outline: none;
+	top: 0px;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+}</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="icon">
+      <iconset resource="psa-resources.qrc">
+       <normaloff>:/images/icons/radio-solid.svg</normaloff>:/images/icons/radio-solid.svg</iconset>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>45</width>
+       <height>48</height>
+      </size>
+     </property>
+     <property name="checkable">
+      <bool>true</bool>
+     </property>
+     <property name="checked">
+      <bool>true</bool>
+     </property>
+     <property name="autoExclusive">
+      <bool>false</bool>
+     </property>
+     <property name="flat">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="info_button">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>0</y>
+       <width>80</width>
+       <height>80</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton {
+    border: none;
+	outline: none;
+	margin: 2px;
+	border-radius: 20px;
+	background-color: rgba(255, 255, 255, 0);
+
+	
+
+}
+
+QPushButton:pressed {
+	margin: 5px;
+    border: none;
+	outline: none;
+}
+
+QPushButton:checked {	
+	margin: 2px;
+    border: none;
+	outline: none;
+	
+		background-color: qlineargradient(spread:pad, x1:1, y1:1, x2:0, y2:0, stop:0 rgba(0, 0, 0, 0), stop:1 rgba(0, 0, 255, 255));
+
+/*	background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.313, fy:0.226818, stop:0.197861 rgba(155, 155, 155, 255), stop:1 rgba(53, 53, 255, 255));*/
+	/*background-color: #2a53ff;*/
+}
+
+QPushButton:unchecked {
+	margin: 2px;
+    border: none;
+	outline: none;
+}
+
+QPushButton:selected{
+	margin: 2px;
+	border: none;
+	outline: none;
+}
+
+QPushButton:focus{
+	margin: 2px;
+	position: absolute;
+    border: none;
+	outline: none;
+	top: 0px;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+}
+QPushButton:hover{
+	margin: 2px;
+	position: absolute;
+    border: none;
+	outline: none;
+	top: 0px;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+}
+
+
+QPushButton:default {
+	position: absolute;
+    border-width: 0px;
+	outline: none;
+	top: 0px;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+}</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="icon">
+      <iconset resource="psa-resources.qrc">
+       <normaloff>:/images/icons/gauge-high-solid.svg</normaloff>:/images/icons/gauge-high-solid.svg</iconset>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>48</width>
+       <height>48</height>
+      </size>
+     </property>
+     <property name="checkable">
+      <bool>true</bool>
+     </property>
+     <property name="checked">
+      <bool>false</bool>
+     </property>
+     <property name="autoExclusive">
+      <bool>false</bool>
+     </property>
+     <property name="flat">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QGroupBox" name="audio_settings_box">
+    <property name="geometry">
+     <rect>
+      <x>530</x>
+      <y>82</y>
+      <width>250</width>
+      <height>275</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>PSA Groupe HMI Sans CS</family>
+      <pointsize>20</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QGroupBox{
+	background-color: rgb(38, 48, 52);
+border: none;
+border-radius: 20px;
+}
+</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+    <property name="flat">
+     <bool>true</bool>
+    </property>
+    <widget class="QGroupBox" name="bass_box">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>5</y>
+       <width>250</width>
+       <height>40</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Dots All For Now JL</family>
+       <pointsize>16</pointsize>
+       <bold>true</bold>
+       <kerning>false</kerning>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QGroupBox{
+/*	background: none;
+	border: 3px solid white;
+	border-radius: 15px;*/
+	border:none;
+
+	background: rgb(57,57,57);
+	border-radius: 15px;
+}
+
+QLabel{
+	
+	color: white;
+}</string>
+     </property>
+     <widget class="QLabel" name="bass_value">
+      <property name="geometry">
+       <rect>
+        <x>120</x>
+        <y>5</y>
+        <width>121</width>
+        <height>30</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Dots All For Now JL</family>
+        <pointsize>16</pointsize>
+        <bold>true</bold>
+        <kerning>false</kerning>
+       </font>
+      </property>
+      <property name="text">
+       <string>+0</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+      </property>
+     </widget>
+     <widget class="QLabel" name="bass_label">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>5</y>
+        <width>121</width>
+        <height>30</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Dots All For Now JL</family>
+        <pointsize>16</pointsize>
+        <bold>true</bold>
+        <kerning>false</kerning>
+       </font>
+      </property>
+      <property name="text">
+       <string>Bass</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QGroupBox" name="treble_box">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>50</y>
+       <width>250</width>
+       <height>40</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>16</pointsize>
+       <bold>true</bold>
+       <kerning>false</kerning>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QGroupBox{
+/*	background: none;
+	border: 3px solid white;
+	border-radius: 15px;*/
+	border:none;
+
+	background: rgb(57,57,57);
+	border-radius: 15px;
+}
+
+QLabel{
+	
+	color: white;
+}</string>
+     </property>
+     <widget class="QLabel" name="treble_value">
+      <property name="geometry">
+       <rect>
+        <x>120</x>
+        <y>5</y>
+        <width>121</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Dots All For Now JL</family>
+        <pointsize>16</pointsize>
+        <bold>true</bold>
+        <kerning>false</kerning>
+       </font>
+      </property>
+      <property name="text">
+       <string>+0</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+      </property>
+     </widget>
+     <widget class="QLabel" name="treble_label">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>5</y>
+        <width>121</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Dots All For Now JL</family>
+        <pointsize>16</pointsize>
+        <bold>true</bold>
+        <kerning>false</kerning>
+       </font>
+      </property>
+      <property name="text">
+       <string>Treble</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QGroupBox" name="loud_box">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>95</y>
+       <width>250</width>
+       <height>40</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QGroupBox{
+/*	background: none;
+	border: 3px solid white;
+	border-radius: 15px;*/
+	border:none;
+
+	background: rgb(57,57,57);
+	border-radius: 15px;
+}
+
+QLabel{
+	
+	color: white;
+}</string>
+     </property>
+     <property name="title">
+      <string/>
+     </property>
+     <widget class="QLabel" name="loud_value">
+      <property name="geometry">
+       <rect>
+        <x>180</x>
+        <y>5</y>
+        <width>61</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Dots All For Now JL</family>
+        <pointsize>16</pointsize>
+        <bold>true</bold>
+        <kerning>false</kerning>
+       </font>
+      </property>
+      <property name="text">
+       <string>OFF</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+      </property>
+     </widget>
+     <widget class="QLabel" name="loud_label">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>5</y>
+        <width>161</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Dots All For Now JL</family>
+        <pointsize>16</pointsize>
+        <bold>true</bold>
+        <kerning>false</kerning>
+       </font>
+      </property>
+      <property name="text">
+       <string>Loudness</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QGroupBox" name="fader_box">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>140</y>
+       <width>250</width>
+       <height>40</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QGroupBox{
+/*	background: none;
+	border: 3px solid white;
+	border-radius: 15px;*/
+	border:none;
+
+	background: rgb(57,57,57);
+	border-radius: 15px;
+}
+
+QLabel{
+	
+	color: white;
+}</string>
+     </property>
+     <property name="title">
+      <string/>
+     </property>
+     <widget class="QLabel" name="fader_value">
+      <property name="geometry">
+       <rect>
+        <x>120</x>
+        <y>5</y>
+        <width>121</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Dots All For Now JL</family>
+        <pointsize>16</pointsize>
+        <bold>true</bold>
+        <kerning>false</kerning>
+       </font>
+      </property>
+      <property name="text">
+       <string>F 1</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+      </property>
+     </widget>
+     <widget class="QLabel" name="fader_label">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>5</y>
+        <width>121</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Dots All For Now JL</family>
+        <pointsize>16</pointsize>
+        <bold>true</bold>
+        <kerning>false</kerning>
+       </font>
+      </property>
+      <property name="text">
+       <string>Fader</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QGroupBox" name="balance_box">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>185</y>
+       <width>250</width>
+       <height>40</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QGroupBox{
+/*	background: none;
+	border: 3px solid white;
+	border-radius: 15px;*/
+	border:none;
+
+	background: rgb(57,57,57);
+	border-radius: 15px;
+}
+
+QLabel{
+	
+	color: white;
+}</string>
+     </property>
+     <property name="title">
+      <string/>
+     </property>
+     <widget class="QLabel" name="balance_value">
+      <property name="geometry">
+       <rect>
+        <x>170</x>
+        <y>5</y>
+        <width>71</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Dots All For Now JL</family>
+        <pointsize>16</pointsize>
+        <bold>true</bold>
+        <kerning>false</kerning>
+       </font>
+      </property>
+      <property name="text">
+       <string>R 1</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+      </property>
+     </widget>
+     <widget class="QLabel" name="balance_label">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>5</y>
+        <width>141</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Dots All For Now JL</family>
+        <pointsize>16</pointsize>
+        <bold>true</bold>
+        <kerning>false</kerning>
+       </font>
+      </property>
+      <property name="text">
+       <string>Balance</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QGroupBox" name="auto_vol_box">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>230</y>
+       <width>250</width>
+       <height>40</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QGroupBox{
+/*	background: none;
+	border: 3px solid white;
+	border-radius: 15px;*/
+	border:none;
+	background-color: #556fde;
+	border-radius: 15px;
+}
+
+QLabel{
+	
+	color: white;
+}</string>
+     </property>
+     <property name="title">
+      <string/>
+     </property>
+     <widget class="QLabel" name="auto_vol_value">
+      <property name="geometry">
+       <rect>
+        <x>180</x>
+        <y>5</y>
+        <width>61</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Dots All For Now JL</family>
+        <pointsize>16</pointsize>
+        <bold>true</bold>
+        <kerning>false</kerning>
+       </font>
+      </property>
+      <property name="text">
+       <string>OFF</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+      </property>
+     </widget>
+     <widget class="QLabel" name="auto_vol_label">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>5</y>
+        <width>141</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Dots All For Now JL</family>
+        <pointsize>16</pointsize>
+        <bold>true</bold>
+        <kerning>false</kerning>
+       </font>
+      </property>
+      <property name="text">
+       <string>Auto-Vol</string>
+      </property>
+     </widget>
+    </widget>
+   </widget>
+  </widget>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>tachometer_window</class>
+   <extends>QWidget</extends>
+   <header>tachometer_window.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>psa_music_window</class>
+   <extends>QWidget</extends>
+   <header>psa_music_window.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>psa_radio_window</class>
+   <extends>QWidget</extends>
+   <header>psa_radio_window.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>psa_badapple_window</class>
+   <extends>QWidget</extends>
+   <header>psa_badapple_window.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
+ <resources>
+  <include location="psa-resources.qrc"/>
+ </resources>
+ <connections/>
+</ui>

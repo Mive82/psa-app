@@ -1,0 +1,1142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>psa_music_window</class>
+ <widget class="QWidget" name="psa_music_window">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>800</width>
+    <height>400</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <widget class="QLabel" name="music_background">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>800</width>
+     <height>400</height>
+    </rect>
+   </property>
+   <property name="pixmap">
+    <pixmap resource="psa-resources.qrc">:/backgrounds/backgrounds/bg.png</pixmap>
+   </property>
+   <property name="scaledContents">
+    <bool>false</bool>
+   </property>
+  </widget>
+  <widget class="QLabel" name="music_album">
+   <property name="geometry">
+    <rect>
+     <x>270</x>
+     <y>120</y>
+     <width>441</width>
+     <height>61</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>PSA Groupe HMI Sans CS</family>
+     <pointsize>14</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+   </property>
+   <property name="wordWrap">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QLabel" name="music_artist">
+   <property name="geometry">
+    <rect>
+     <x>270</x>
+     <y>80</y>
+     <width>441</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>PSA Groupe HMI Sans CS</family>
+     <pointsize>16</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+   </property>
+   <property name="wordWrap">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QLabel" name="music_cover">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>20</y>
+     <width>240</width>
+     <height>240</height>
+    </rect>
+   </property>
+   <property name="pixmap">
+    <pixmap resource="demo-resources.qrc">:/images/demo-icons/cover.png</pixmap>
+   </property>
+   <property name="scaledContents">
+    <bool>false</bool>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="music_title">
+   <property name="geometry">
+    <rect>
+     <x>270</x>
+     <y>20</y>
+     <width>421</width>
+     <height>61</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>PSA Groupe HMI Sans CS</family>
+     <pointsize>20</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="textFormat">
+    <enum>Qt::AutoText</enum>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+   </property>
+   <property name="wordWrap">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QSlider" name="volume_slider">
+   <property name="geometry">
+    <rect>
+     <x>740</x>
+     <y>30</y>
+     <width>41</width>
+     <height>271</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QSlider::groove:vertical {
+    border: 1px solid #999999;
+    width: 8px; /* the groove expands to the size of the slider by default. by giving it a height, it has a fixed size */
+    background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #B1B1B1, stop:1 rgb(0, 255, 255));
+    margin: 2px 0;
+	border-radius: 3px;
+}
+
+QSlider::handle:vertical {
+    background: qlineargradient(x1:0, y1:0, x2:1, y2:1, stop:0 rgb(0, 170, 255), stop:1 rgb(170, 85, 255));
+    border: 1px solid #5c5c5c;
+    width: 30px;
+	height: 30px;
+    margin: -10px;
+	border-radius: 6px;
+}</string>
+   </property>
+   <property name="maximum">
+    <number>100</number>
+   </property>
+   <property name="value">
+    <number>1</number>
+   </property>
+   <property name="orientation">
+    <enum>Qt::Vertical</enum>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="play_pause_button">
+   <property name="geometry">
+    <rect>
+     <x>305</x>
+     <y>320</y>
+     <width>80</width>
+     <height>40</height>
+    </rect>
+   </property>
+   <property name="focusPolicy">
+    <enum>Qt::NoFocus</enum>
+   </property>
+   <property name="autoFillBackground">
+    <bool>false</bool>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton {
+    border: none;
+	outline: none;
+	margin: 0px;	
+	border-radius: 10px;
+	background-color: qlineargradient(spread:pad, x1:1, y1:1, x2:0, y2:0, stop:0 rgba(0, 0, 0, 0), stop:1 rgba(120, 120, 120, 255));
+
+}
+
+QPushButton:pressed {
+	margin: 0px;
+	position: absolute;
+    border: none;
+	outline: none;
+	background-color: qlineargradient(spread:pad, x1:1, y1:1, x2:0, y2:0, stop:0 rgba(0, 0, 0, 0), stop:1 rgba(160, 160, 160, 255));
+	top: 0px;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+}
+
+QPushButton:flat {
+	margin: 0px;
+    border: none;
+	outline: none;
+	top: 0px;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+}
+QPushButton:checked {	
+	margin: 0px;
+	position: absolute;
+    border: none;
+	outline: none;
+	top: 0px;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+}
+
+QPushButton:unchecked {
+	margin: 0px;
+	position: absolute;
+    border: none;
+	outline: none;
+	top: 0px;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+}
+
+QPushButton:selected{
+	margin: 0px;
+	position: absolute;
+	border: none;
+	outline: none;
+	top: 0px;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+}
+
+QPushButton:focus{
+	margin: 0px;
+	position: absolute;
+    border: none;
+	outline: none;
+	top: 0px;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+}
+QPushButton:hover{
+	margin: 0px;
+	position: absolute;
+    border: none;
+	outline: none;
+	top: 0px;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+}
+
+
+QPushButton:default {
+	position: absolute;
+    border-width: 0px;
+	outline: none;
+	top: 0px;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+}</string>
+   </property>
+   <property name="icon">
+    <iconset resource="psa-resources.qrc">
+     <normaloff>:/images/player/media-playback-start-symbolic.svg</normaloff>
+     <normalon>:/images/player/media-playback-pause-symbolic.svg</normalon>:/images/player/media-playback-start-symbolic.svg</iconset>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>32</width>
+     <height>32</height>
+    </size>
+   </property>
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>false</bool>
+   </property>
+   <property name="flat">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QListWidget" name="music_list">
+   <property name="geometry">
+    <rect>
+     <x>120</x>
+     <y>0</y>
+     <width>680</width>
+     <height>400</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>PSA Groupe HMI Sans CS</family>
+     <pointsize>20</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QListWidget{
+	border-radius: 15px;
+
+}
+
+QListView{
+	padding: 10px;
+	outline: none;
+	border: none;
+	border-radius: 15px;
+	color: rgb(217, 217, 217);
+	background-color: rgb(38, 48, 52);
+	alternate-background-color: rgb(38, 48, 52);
+}
+
+QListView::item{
+	outline: none;
+	border: none;
+	padding: 5px;
+	margin: 5px;
+	border-radius: 15px;
+	background-color: rgb(57, 57, 57);
+}
+
+QListView::item:alternate{
+	background-color: rgb(95, 95, 95);
+}
+
+QListView::item:selected{
+	
+	background-color: rgb(42, 83, 255);
+}
+/*
+QScrollBar:vertical {
+	/*margin: 5px;
+	background: rgb(57, 57, 57);
+	padding: 5px;
+	width: 18px;
+	border-radius: 5px
+}
+
+QScrollBar::handle:vertical {
+	background-color: gray;
+	border-radius: 4px;
+}
+
+QScrollBar::add-line:vertical {
+height: 0px;
+}
+
+QScrollBar::sub-line:vertical {
+height: 0px;
+background: rgb(57, 57, 57);
+}
+
+QScrollBar::sub-page:vertical {
+height: 0px;
+background: rgb(57, 57, 57);
+}
+
+QScrollBar::add-page:vertical{
+height: 0px;
+background: rgb(57, 57, 57);
+}*/
+</string>
+   </property>
+   <property name="frameShape">
+    <enum>QFrame::NoFrame</enum>
+   </property>
+   <property name="frameShadow">
+    <enum>QFrame::Plain</enum>
+   </property>
+   <property name="lineWidth">
+    <number>0</number>
+   </property>
+   <property name="verticalScrollBarPolicy">
+    <enum>Qt::ScrollBarAsNeeded</enum>
+   </property>
+   <property name="horizontalScrollBarPolicy">
+    <enum>Qt::ScrollBarAlwaysOff</enum>
+   </property>
+   <property name="sizeAdjustPolicy">
+    <enum>QAbstractScrollArea::AdjustToContents</enum>
+   </property>
+   <property name="editTriggers">
+    <set>QAbstractItemView::NoEditTriggers</set>
+   </property>
+   <property name="dragEnabled">
+    <bool>false</bool>
+   </property>
+   <property name="defaultDropAction">
+    <enum>Qt::IgnoreAction</enum>
+   </property>
+   <property name="alternatingRowColors">
+    <bool>false</bool>
+   </property>
+   <property name="verticalScrollMode">
+    <enum>QAbstractItemView::ScrollPerPixel</enum>
+   </property>
+   <property name="horizontalScrollMode">
+    <enum>QAbstractItemView::ScrollPerPixel</enum>
+   </property>
+   <property name="movement">
+    <enum>QListView::Static</enum>
+   </property>
+   <item>
+    <property name="text">
+     <string>Stvar2</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Stvar3</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>New Item</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>New Item</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>New Item</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>New Item</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>New Item</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>New Item</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>New Item</string>
+    </property>
+   </item>
+  </widget>
+  <widget class="QPushButton" name="folder_button">
+   <property name="geometry">
+    <rect>
+     <x>35</x>
+     <y>330</y>
+     <width>50</width>
+     <height>50</height>
+    </rect>
+   </property>
+   <property name="autoFillBackground">
+    <bool>false</bool>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton {
+    border: none;
+    background-color: rgba(255, 255, 255, 0);
+	padding: 5px;
+}
+
+QPushButton:pressed {
+    background-color: rgba(255, 255, 255, 0);
+	
+}
+
+QPushButton:flat {
+    border: none; /* no border for a flat push button */
+}
+
+QPushButton:default {
+    border: none;
+}</string>
+   </property>
+   <property name="text">
+    <string notr="true"/>
+   </property>
+   <property name="icon">
+    <iconset resource="psa-resources.qrc">
+     <normaloff>:/symbols/icons/folder-symbolic.svg</normaloff>
+     <normalon>:/symbols/icons/folder-open-symbolic.svg</normalon>:/symbols/icons/folder-symbolic.svg</iconset>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>40</width>
+     <height>40</height>
+    </size>
+   </property>
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>false</bool>
+   </property>
+   <property name="flat">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QLabel" name="duration_label">
+   <property name="geometry">
+    <rect>
+     <x>280</x>
+     <y>190</y>
+     <width>151</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>PSA Groupe HMI Sans CS</family>
+     <pointsize>16</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>00:00 / 00:00</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="next_button">
+   <property name="geometry">
+    <rect>
+     <x>515</x>
+     <y>320</y>
+     <width>80</width>
+     <height>40</height>
+    </rect>
+   </property>
+   <property name="focusPolicy">
+    <enum>Qt::NoFocus</enum>
+   </property>
+   <property name="autoFillBackground">
+    <bool>false</bool>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton {
+    border: none;
+	outline: none;
+	margin: 0px;	
+	border-radius: 10px;
+	background-color: qlineargradient(spread:pad, x1:1, y1:1, x2:0, y2:0, stop:0 rgba(0, 0, 0, 0), stop:1 rgba(120, 120, 120, 255));
+}
+
+QPushButton:pressed {
+	margin: 0px;
+	position: absolute;
+    border: none;
+	outline: none;
+	background-color: qlineargradient(spread:pad, x1:1, y1:1, x2:0, y2:0, stop:0 rgba(0, 0, 0, 0), stop:1 rgba(160, 160, 160, 255));
+	top: 0px;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+}
+
+QPushButton:flat {
+	margin: 0px;
+    border: none;
+	outline: none;
+	top: 0px;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+}
+QPushButton:checked {	
+	margin: 0px;
+	position: absolute;
+    border: none;
+	outline: none;
+	top: 0px;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+}
+
+QPushButton:unchecked {
+	margin: 0px;
+	position: absolute;
+    border: none;
+	outline: none;
+	top: 0px;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+}
+
+QPushButton:selected{
+	margin: 0px;
+	position: absolute;
+	border: none;
+	outline: none;
+	top: 0px;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+}
+
+QPushButton:focus{
+	margin: 0px;
+	position: absolute;
+    border: none;
+	outline: none;
+	top: 0px;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+}
+QPushButton:hover{
+	margin: 0px;
+	position: absolute;
+    border: none;
+	outline: none;
+	top: 0px;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+}
+
+
+QPushButton:default {
+	position: absolute;
+    border-width: 0px;
+	outline: none;
+	top: 0px;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+}</string>
+   </property>
+   <property name="icon">
+    <iconset resource="psa-resources.qrc">
+     <normaloff>:/images/player/media-skip-forward-symbolic.svg</normaloff>:/images/player/media-skip-forward-symbolic.svg</iconset>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>32</width>
+     <height>32</height>
+    </size>
+   </property>
+   <property name="checkable">
+    <bool>false</bool>
+   </property>
+   <property name="checked">
+    <bool>false</bool>
+   </property>
+   <property name="flat">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="prev_button">
+   <property name="geometry">
+    <rect>
+     <x>200</x>
+     <y>320</y>
+     <width>80</width>
+     <height>40</height>
+    </rect>
+   </property>
+   <property name="focusPolicy">
+    <enum>Qt::NoFocus</enum>
+   </property>
+   <property name="autoFillBackground">
+    <bool>false</bool>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton {
+    border: none;
+	outline: none;
+	margin: 0px;	
+	border-radius: 10px;
+	background-color: qlineargradient(spread:pad, x1:1, y1:1, x2:0, y2:0, stop:0 rgba(0, 0, 0, 0), stop:1 rgba(120, 120, 120, 255));
+}
+
+QPushButton:pressed {
+	margin: 0px;
+	position: absolute;
+    border: none;
+	outline: none;
+	background-color: qlineargradient(spread:pad, x1:1, y1:1, x2:0, y2:0, stop:0 rgba(0, 0, 0, 0), stop:1 rgba(160, 160, 160, 255));
+	top: 0px;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+}
+
+QPushButton:flat {
+	margin: 0px;
+    border: none;
+	outline: none;
+	top: 0px;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+}
+QPushButton:checked {	
+	margin: 0px;
+	position: absolute;
+    border: none;
+	outline: none;
+	top: 0px;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+}
+
+QPushButton:unchecked {
+	margin: 0px;
+	position: absolute;
+    border: none;
+	outline: none;
+	top: 0px;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+}
+
+QPushButton:selected{
+	margin: 0px;
+	position: absolute;
+	border: none;
+	outline: none;
+	top: 0px;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+}
+
+QPushButton:focus{
+	margin: 0px;
+	position: absolute;
+    border: none;
+	outline: none;
+	top: 0px;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+}
+QPushButton:hover{
+	margin: 0px;
+	position: absolute;
+    border: none;
+	outline: none;
+	top: 0px;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+}
+
+
+QPushButton:default {
+	position: absolute;
+    border-width: 0px;
+	outline: none;
+	top: 0px;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+}</string>
+   </property>
+   <property name="icon">
+    <iconset resource="psa-resources.qrc">
+     <normaloff>:/images/player/media-skip-backward-symbolic.svg</normaloff>:/images/player/media-skip-backward-symbolic.svg</iconset>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>32</width>
+     <height>32</height>
+    </size>
+   </property>
+   <property name="checkable">
+    <bool>false</bool>
+   </property>
+   <property name="checked">
+    <bool>false</bool>
+   </property>
+   <property name="flat">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QListWidget" name="playlist_list">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>400</y>
+     <width>680</width>
+     <height>400</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>PSA Groupe HMI Sans CS</family>
+     <pointsize>20</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QListWidget{
+	border-radius: 15px;
+
+}
+
+QListView{
+	padding: 10px;
+	outline: none;
+	border: none;
+	border-radius: 15px;
+	color: rgb(217, 217, 217);
+	background-color: rgb(38, 48, 52);
+	alternate-background-color: rgb(38, 48, 52);
+}
+
+QListView::item{
+	outline: none;
+	border: none;
+	padding: 5px;
+	margin: 5px;
+	border-radius: 15px;
+	background-color: rgb(57, 57, 57);
+}
+
+QListView::item:alternate{
+	background-color: rgb(95, 95, 95);
+}
+
+QListView::item:selected{
+	
+	background-color: rgb(42, 83, 255);
+}
+
+QScrollBar:vertical {
+	/*margin: 5px;*/
+	background: rgb(57, 57, 57);
+	padding: 5px;
+	width: 18px;
+	border-radius: 5px
+}
+
+QScrollBar::handle:vertical {
+	background-color: gray;
+	border-radius: 4px;
+}
+
+QScrollBar::add-line:vertical {
+height: 0px;
+}
+
+QScrollBar::sub-line:vertical {
+height: 0px;
+background: rgb(57, 57, 57);
+}
+
+QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
+height: 0px;
+background: rgb(57, 57, 57);
+}
+
+</string>
+   </property>
+   <property name="frameShape">
+    <enum>QFrame::NoFrame</enum>
+   </property>
+   <property name="frameShadow">
+    <enum>QFrame::Plain</enum>
+   </property>
+   <property name="lineWidth">
+    <number>0</number>
+   </property>
+   <property name="verticalScrollBarPolicy">
+    <enum>Qt::ScrollBarAsNeeded</enum>
+   </property>
+   <property name="horizontalScrollBarPolicy">
+    <enum>Qt::ScrollBarAlwaysOff</enum>
+   </property>
+   <property name="sizeAdjustPolicy">
+    <enum>QAbstractScrollArea::AdjustToContents</enum>
+   </property>
+   <property name="editTriggers">
+    <set>QAbstractItemView::NoEditTriggers</set>
+   </property>
+   <property name="showDropIndicator" stdset="0">
+    <bool>false</bool>
+   </property>
+   <property name="dragEnabled">
+    <bool>false</bool>
+   </property>
+   <property name="defaultDropAction">
+    <enum>Qt::IgnoreAction</enum>
+   </property>
+   <property name="alternatingRowColors">
+    <bool>false</bool>
+   </property>
+   <property name="verticalScrollMode">
+    <enum>QAbstractItemView::ScrollPerPixel</enum>
+   </property>
+   <property name="horizontalScrollMode">
+    <enum>QAbstractItemView::ScrollPerPixel</enum>
+   </property>
+   <property name="movement">
+    <enum>QListView::Static</enum>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="stop_button">
+   <property name="geometry">
+    <rect>
+     <x>410</x>
+     <y>320</y>
+     <width>80</width>
+     <height>40</height>
+    </rect>
+   </property>
+   <property name="focusPolicy">
+    <enum>Qt::NoFocus</enum>
+   </property>
+   <property name="autoFillBackground">
+    <bool>false</bool>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton {
+    border: none;
+	outline: none;
+	margin: 0px;	
+	border-radius: 10px;
+	background-color: qlineargradient(spread:pad, x1:1, y1:1, x2:0, y2:0, stop:0 rgba(0, 0, 0, 0), stop:1 rgba(120, 120, 120, 255));
+}
+
+QPushButton:pressed {
+	margin: 0px;
+	position: absolute;
+    border: none;
+	outline: none;
+	background-color: qlineargradient(spread:pad, x1:1, y1:1, x2:0, y2:0, stop:0 rgba(0, 0, 0, 0), stop:1 rgba(160, 160, 160, 255));
+	top: 0px;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+}
+
+QPushButton:flat {
+	margin: 0px;
+    border: none;
+	outline: none;
+	top: 0px;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+}
+QPushButton:checked {	
+	margin: 0px;
+	position: absolute;
+    border: none;
+	outline: none;
+	top: 0px;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+}
+
+QPushButton:unchecked {
+	margin: 0px;
+	position: absolute;
+    border: none;
+	outline: none;
+	top: 0px;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+}
+
+QPushButton:selected{
+	margin: 0px;
+	position: absolute;
+	border: none;
+	outline: none;
+	top: 0px;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+}
+
+QPushButton:focus{
+	margin: 0px;
+	position: absolute;
+    border: none;
+	outline: none;
+	top: 0px;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+}
+QPushButton:hover{
+	margin: 0px;
+	position: absolute;
+    border: none;
+	outline: none;
+	top: 0px;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+}
+
+
+QPushButton:default {
+	position: absolute;
+    border-width: 0px;
+	outline: none;
+	top: 0px;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+}</string>
+   </property>
+   <property name="icon">
+    <iconset resource="psa-resources.qrc">
+     <normaloff>:/images/player/media-playback-stop-symbolic.svg</normaloff>:/images/player/media-playback-stop-symbolic.svg</iconset>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>32</width>
+     <height>32</height>
+    </size>
+   </property>
+   <property name="checkable">
+    <bool>false</bool>
+   </property>
+   <property name="checked">
+    <bool>false</bool>
+   </property>
+   <property name="flat">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QLabel" name="volume_label">
+   <property name="geometry">
+    <rect>
+     <x>634</x>
+     <y>280</y>
+     <width>111</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>volume</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="playlist_button">
+   <property name="geometry">
+    <rect>
+     <x>705</x>
+     <y>330</y>
+     <width>50</width>
+     <height>50</height>
+    </rect>
+   </property>
+   <property name="autoFillBackground">
+    <bool>false</bool>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton {
+    border: none;
+    background-color: rgba(255, 255, 255, 0);
+	padding: 5px;
+}
+
+QPushButton:pressed {
+    background-color: rgba(255, 255, 255, 0);
+	
+}
+
+QPushButton:flat {
+    border: none; /* no border for a flat push button */
+}
+
+QPushButton:default {
+    border: none;
+}</string>
+   </property>
+   <property name="text">
+    <string notr="true"/>
+   </property>
+   <property name="icon">
+    <iconset resource="psa-resources.qrc">
+     <normaloff>:/symbols/icons/music-playlist-symbolic.svg</normaloff>
+     <normalon>:/symbols/icons/music-playlist-selected.svg</normalon>:/symbols/icons/music-playlist-symbolic.svg</iconset>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>40</width>
+     <height>40</height>
+    </size>
+   </property>
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>false</bool>
+   </property>
+   <property name="flat">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <zorder>music_background</zorder>
+  <zorder>music_album</zorder>
+  <zorder>music_artist</zorder>
+  <zorder>music_cover</zorder>
+  <zorder>music_title</zorder>
+  <zorder>volume_slider</zorder>
+  <zorder>duration_label</zorder>
+  <zorder>next_button</zorder>
+  <zorder>play_pause_button</zorder>
+  <zorder>prev_button</zorder>
+  <zorder>stop_button</zorder>
+  <zorder>volume_label</zorder>
+  <zorder>folder_button</zorder>
+  <zorder>playlist_button</zorder>
+  <zorder>music_list</zorder>
+  <zorder>playlist_list</zorder>
+ </widget>
+ <resources>
+  <include location="demo-resources.qrc"/>
+  <include location="psa-resources.qrc"/>
+ </resources>
+ <connections/>
+</ui>

@@ -1,0 +1,79 @@
+<RCC>
+    <qresource prefix="/images">
+        <file>icons/music.png</file>
+        <file>icons/info.png</file>
+        <file>icons/radio.png</file>
+        <file>icons/speedo.png</file>
+        <file>icons/aauto.png</file>
+        <file>icons-off/aauto_off.png</file>
+        <file>icons-off/info_off.png</file>
+        <file>icons-off/music_off.png</file>
+        <file>icons-off/radio_off.png</file>
+        <file>icons-off/speedo_off.png</file>
+        <file>icons/cover-placeholder.png</file>
+        <file>player/media-playback-pause-symbolic.svg</file>
+        <file>player/media-playback-start-symbolic.svg</file>
+        <file>player/media-playback-stop-symbolic.svg</file>
+        <file>player/media-skip-backward-symbolic.svg</file>
+        <file>player/media-skip-forward-symbolic.svg</file>
+        <file>icons/aauto-vector.svg</file>
+        <file>icons/gauge-high-solid.svg</file>
+        <file>icons/info-solid.svg</file>
+        <file>icons/music-solid.svg</file>
+        <file>icons/radio-solid.svg</file>
+    </qresource>
+    <qresource prefix="/symbols">
+        <file>icons/fuel.png</file>
+        <file>icons/temp.png</file>
+        <file>icons/speedo_1.png</file>
+        <file>icons/disc.png</file>
+        <file>icons/arrow.png</file>
+        <file>icons/arrow-left.png</file>
+        <file>icons/menu.png</file>
+        <file>icons/mute.png</file>
+        <file>icons/signal-2.svg</file>
+        <file>icons/signal-0.svg</file>
+        <file>icons/signal-1.svg</file>
+        <file>icons/signal-3.svg</file>
+        <file>icons/signal-4.svg</file>
+        <file>icons/folder-open-symbolic.svg</file>
+        <file>icons/folder-symbolic.svg</file>
+        <file>icons/music-playlist-symbolic.svg</file>
+        <file>icons/music-playlist-selected.svg</file>
+        <file>icons/engine-oil-white.png</file>
+    </qresource>
+    <qresource prefix="/backgrounds">
+        <file>backgrounds/bg.png</file>
+        <file>backgrounds/pezo2.png</file>
+    </qresource>
+    <qresource prefix="/tachometer">
+        <file>tacho/8k.png</file>
+        <file>tacho/7k.png</file>
+        <file>tacho/needle.png</file>
+        <file>tacho/background.png</file>
+    </qresource>
+    <qresource prefix="/fonts">
+        <file>fonts/dejavu_sans_mono.ttf</file>
+        <file>fonts/DroidSansMono.ttf</file>
+        <file>fonts/AzeretMono-BoldItalic.ttf</file>
+        <file>fonts/DSEG7Classic-Bold.ttf</file>
+        <file>fonts/DSEG14Modern-Bold.ttf</file>
+        <file>fonts/DSEG14Classic-Bold.ttf</file>
+        <file>fonts/Dotsalfn.ttf</file>
+        <file>fonts/PSAGroupeHMISansCS-Bold.ttf</file>
+    </qresource>
+    <qresource prefix="/music"/>
+    <qresource prefix="/memes">
+        <file>memes/badapple.mp4</file>
+        <file>memes/apple.png</file>
+    </qresource>
+    <qresource prefix="/doors">
+        <file>doors/base.png</file>
+        <file>doors/boot.png</file>
+        <file>doors/front_left.png</file>
+        <file>doors/front_right.png</file>
+        <file>doors/hood.png</file>
+        <file>doors/rear_left.png</file>
+        <file>doors/rear_right.png</file>
+    </qresource>
+</RCC>

@@ -1,0 +1,5 @@
+<RCC>
+  <qresource prefix="images">
+    <file>demo-icons/cover.png</file>
+  </qresource>
+</RCC>
