@@ -63,3 +63,6 @@ RESOURCES += \
     psa-resources.qrc
 
 # DEFINES += PSA_SIMULATE
+
+DISTFILES += \
+    README.md

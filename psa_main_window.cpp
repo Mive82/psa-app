@@ -108,7 +108,7 @@ psa_main_window::psa_main_window(QWidget *parent)
     this->van_handle->receive_cd_player_packets(true, 300);
     this->van_handle->receive_door_packets(true, 100);
     this->van_handle->receive_status_packet(true, 90);
-    this->van_handle->receive_preset_packet();
+//    this->van_handle->receive_preset_packet();
     QObject::connect(this->van_handle, &psa_van_receiver::radio_data_changed, this->ui->radio_widget, &psa_radio_window::receive_radio_data);
     QObject::connect(this->van_handle, &psa_van_receiver::engine_data_changed, this->ui->rpm_widget, &tachometer_window::receive_engine_data);
     QObject::connect(this->van_handle, &psa_van_receiver::headunit_data_changed, this->ui->radio_widget, &psa_radio_window::receive_headunit_data);

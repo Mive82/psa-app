@@ -3,12 +3,17 @@
 #include <QPainterPath>
 #include <QPen>
 #include <QTimer>
+#include <QIcon>
 
 #include <math.h>
 
 
 #include <QtConcurrent/QtConcurrentRun>
 
+static const int gear_up_first_level = 2800;
+static const int gear_up_second_level = 4000;
+static const int gear_up_blink_interval_ms = 350;
+static const enum tacho_gear top_gear = GEAR_5;
 
 tachometer::tachometer(QObject *parent) : QObject{parent}
 {
@@ -23,9 +28,13 @@ tachometer::tachometer(tacho_range_t range, QObject *parent) : QObject{parent}
 void tachometer::create_tachometer(tacho_range_t range)
 {
     this->gear_timer = new QTimer(this);
+    this->gear_up_blink_timer = new QTimer(this);
     connect(this->gear_timer, &QTimer::timeout, this, &tachometer::update_gear_display);
+    connect(this->gear_up_blink_timer, &QTimer::timeout, this, &tachometer::toggle_gear_up_display);
     this->speed_update_watcher = new QFutureWatcher<void>(this);
     this->rpm_update_watcher = new QFutureWatcher<void>(this);
+
+    this->gear_up_visible = false;
 
     QObject::connect(this->speed_update_watcher, &QFutureWatcher<void>::finished, this, &tachometer::update_display);
     QObject::connect(this->rpm_update_watcher, &QFutureWatcher<void>::finished, this, &tachometer::update_display);
@@ -33,6 +42,11 @@ void tachometer::create_tachometer(tacho_range_t range)
 
     tacho_bg = new QPixmap(":/tachometer/tacho/background.png");
     tacho_needle = new QPixmap(":/tachometer/tacho/needle.png");
+
+//    QIcon gear_up_qicon_temp = QIcon(":/tachometer/tacho/gear_up.svg");
+
+
+    gear_up_icon = new QPixmap(QIcon(":/tachometer/tacho/gear_up.svg").pixmap(QSize(45,45)));
 
     switch(range)
     {
@@ -68,6 +82,7 @@ void tachometer::create_tachometer(tacho_range_t range)
     tacho_bg_item = scene->addPixmap(*tacho_bg);
     tacho_numbers_item = scene->addPixmap(*tacho_numbers);
     tacho_needle_item = scene->addPixmap(*tacho_needle);
+
 
     tacho_numbers_item->setParentItem(tacho_bg_item);
     tacho_needle_item->setParentItem(tacho_bg_item);
@@ -111,16 +126,28 @@ void tachometer::create_tachometer(tacho_range_t range)
     tacho_speed_item->setDefaultTextColor(Qt::black);
     tacho_speed_bg_item->setDefaultTextColor(QColor(0,0,0,40));
 
+    gear_up_icon_item = scene->addPixmap(*this->gear_up_icon);
+    gear_up_icon_item->setPos(210,150);
+    gear_up_icon_item->setParentItem(tacho_bg_item);
+    gear_up_icon_item->setVisible(gear_up_visible);
+
     set_rpm(0);
 //    set_speed(0.f);
 
 }
 
+void tachometer::toggle_gear_up_display()
+{
+    this->gear_up_visible = !this->gear_up_visible;
+    this->gear_up_icon_item->setVisible(this->gear_up_visible);
+}
 
 void tachometer::set_gear(tacho_gear_t gear)
 {
     if(gear != new_gear)
     {
+        this->gear_up_grace = true;
+        update_gear_up(this->rpm);
         this->new_gear = gear;
         this->gear_timer->stop();
         this->gear_timer->start(1000);
@@ -128,9 +155,16 @@ void tachometer::set_gear(tacho_gear_t gear)
 
 }
 
+void tachometer::set_gear(int gear)
+{
+    set_gear((tacho_gear_t)gear);
+}
+
 void tachometer::update_gear_display()
 {
+    this->gear_up_grace = false;
     this->old_gear = this->new_gear;
+    update_gear_up(this->rpm);
     this->gear_timer->stop();
     switch(this->old_gear)
     {
@@ -172,9 +206,56 @@ void tachometer::set_speed_pos(int x, int y)
      tacho_speed_item->setPos(x,y);
 }
 
+void tachometer::update_gear_up(int rpm)
+{
+    if(this->new_gear == top_gear || this->gear_up_grace || this->old_gear < GEAR_1)
+    {
+        if(gear_up_state != 0)
+        {
+
+            this->gear_up_icon_item->setVisible(false);
+            this->gear_up_visible = false;
+            this->gear_up_blink_timer->stop();
+            gear_up_state = 0;
+        }
+    }
+    else{
+        if(rpm < gear_up_first_level)
+        {
+            if(gear_up_state != 0)
+            {
+
+                this->gear_up_icon_item->setVisible(false);
+                this->gear_up_visible = false;
+                this->gear_up_blink_timer->stop();
+                gear_up_state = 0;
+            }
+        }
+        else if(rpm < gear_up_second_level)
+        {
+            if(gear_up_state != 1)
+            {
+                this->gear_up_icon_item->setVisible(true);
+                this->gear_up_visible = true;
+                this->gear_up_blink_timer->stop();
+                gear_up_state = 1;
+            }
+        }
+        else{
+            if(gear_up_state != 2)
+            {
+                this->toggle_gear_up_display();
+                this->gear_up_blink_timer->start(gear_up_blink_interval_ms);
+                gear_up_state = 2;
+            }
+        }
+    }
+}
+
 void tachometer::set_rpm(int rpm)
 {
     this->rpm = rpm;
+    this->update_gear_up(this->rpm);
     //QFuture<void> future = QtConcurrent::run(this, &tachometer::get_angle_from_rpm);
     //this->rpm_update_watcher->setFuture(future);
     this->rpm_angle = get_angle_from_rpm();
