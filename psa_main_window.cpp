@@ -18,6 +18,8 @@ static bool radio_power_state = false;
 static enum psa_radio_source radio_source = PSA_RADIO_NONE;
 static enum psa_cd_changer_commands last_cdc_comm = PSA_CD_CHANGER_COMM_NONE;
 
+static enum psa_car_state last_state = PSA_STATE_UNKNOWN;
+
 static enum psa_selected_audio_setting old_audio_setting = PSA_AUDIO_NONE;
 //static int audio_menu_open = 0;
 
@@ -126,7 +128,7 @@ psa_main_window::psa_main_window(QWidget *parent)
     QObject::connect(this->van_handle, &psa_van_receiver::headunit_data_changed, this, &psa_main_window::parse_headunit_data);
 
     QObject::connect(this->van_handle, &psa_van_receiver::door_data_changed, this, &psa_main_window::parse_door_data);
-//    QObject::connect(this->van_handle, &psa_van_receiver::status_data_changed, this, &psa_main_window::parse_status_data);
+    QObject::connect(this->van_handle, &psa_van_receiver::status_data_changed, this, &psa_main_window::parse_status_data);
 
 #endif
 
@@ -139,6 +141,10 @@ psa_main_window::psa_main_window(QWidget *parent)
     QObject::connect(ui->speed_slider, &QSlider::valueChanged, ui->rpm_widget, &tachometer_window::change_speed);
     QObject::connect(ui->speed_slider, &QSlider::valueChanged, this, &psa_main_window::set_main_display_speed);
     QObject::connect(this->volume_box_timer, &QTimer::timeout, this, &psa_main_window::hide_volume_screen);
+
+    QObject::connect(this->ui->music_widget, &psa_music_window::media_loaded, this, &psa_main_window::handle_music_on_resume);
+
+
 
     this->ui->music_widget->set_van_handle(this->van_handle);
     this->ui->rpm_widget->set_van_handle(this->van_handle);
@@ -178,6 +184,14 @@ void psa_main_window::showEvent(QShowEvent *event)
 void psa_main_window::refresh_screens()
 {
     display_selected_window();
+}
+
+void psa_main_window::handle_music_on_resume()
+{
+    if(radio_source == PSA_RADIO_EXTERNAL)
+    {
+        this->ui->music_widget->resume_player();
+    }
 }
 
 void psa_main_window::display_selected_window()
@@ -594,27 +608,36 @@ void psa_main_window::parse_door_data(psa_door_data_t door_data)
 
 void psa_main_window::parse_status_data(psa_status_data_t status_data)
 {
-    switch(status_data.car_state)
+    if(status_data.car_state != last_state)
     {
-    case PSA_STATE_CAR_OFF:
-    case PSA_STATE_CAR_LOCKED:
-    case PSA_STATE_CAR_SLEEP:
-    case PSA_STATE_ECONOMY_MODE:
-    case PSA_STATE_UNKNOWN:
-    default:
-        this->ui->music_widget->stop_player();
-    case PSA_STATE_CRANKING:
-        this->pi_helper->set_lcd_brightness(0);
-        display_status = 0;
-        break;
-    case PSA_STATE_ACCESSORY:
-    case PSA_STATE_ENGINE_ON:
-    case PSA_STATE_IGNITION:
-    case PSA_STATE_RADIO_ON:
-        this->pi_helper->set_lcd_brightness(last_brightness);
-        display_status = 1;
-        break;
 
+        switch(status_data.car_state)
+        {
+        case PSA_STATE_CAR_OFF:
+        case PSA_STATE_CAR_LOCKED:
+        case PSA_STATE_CAR_SLEEP:
+        case PSA_STATE_ECONOMY_MODE:
+        case PSA_STATE_UNKNOWN:
+        default:
+            this->ui->music_widget->stop_player();
+        case PSA_STATE_CRANKING:
+            this->pi_helper->set_lcd_brightness(0);
+            display_status = 0;
+            break;
+        case PSA_STATE_ACCESSORY:
+        case PSA_STATE_ENGINE_ON:
+        case PSA_STATE_IGNITION:
+        case PSA_STATE_RADIO_ON:
+            if(last_state <= PSA_STATE_CAR_OFF)
+            {
+                this->ui->music_widget->refresh_root_music_directory();
+            }
+            this->pi_helper->set_lcd_brightness(last_brightness);
+            display_status = 1;
+            break;
+        }
+
+        last_state = (enum psa_car_state)status_data.car_state;
     }
 
     enum psa_cd_changer_commands new_cdc_comm = (enum psa_cd_changer_commands)status_data.cd_changer_command;
