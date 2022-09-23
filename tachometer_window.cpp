@@ -20,6 +20,15 @@ tachometer_window::tachometer_window(QWidget *parent) :
 //    QObject::connect(this->van_handle, &psa_van_receiver::engine_data_changed, this, &tachometer_window::receive_new_data);
 //    QObject::connect(this->ui->rpm_slider, &QSlider::valueChanged, this, &tachometer_window::change_tacho_angle);
 //    connect(this->ui->gear_slider, &QSlider::valueChanged, this->tacho_handle, QOverload<int>::of(&tachometer::set_gear));
+
+    connect(this->ui->reset_button_a, &QPushButton::clicked, this, &tachometer_window::send_trip_reset_a);
+    connect(this->ui->reset_button_b, &QPushButton::clicked, this, &tachometer_window::send_trip_reset_b);
+
+    connect(this->ui->trip_show_button, &QPushButton::clicked, this, &tachometer_window::toggle_trip_visibility);
+
+    this->ui->trip_widget->setGeometry(QRect(0,150,230,250));
+    this->ui->trip_widget->hide();
+
     scene = tacho_handle->get_scene();
 
     this->ui->gear_slider->hide();
@@ -44,6 +53,43 @@ tachometer_window::tachometer_window(QWidget *parent) :
 
     //ui->tachometer->setBackgroundBrush(QBrush(Qt::transparent));
     //ui->tachometer->setForegroundBrush(QBrush(Qt::transparent));
+}
+
+
+void tachometer_window::toggle_trip_visibility()
+{
+    if(this->window_visible)
+    {
+        this->ui->trip_widget->hide();
+        this->window_visible = 0;
+    }
+    else{
+        this->ui->trip_widget->show();
+        this->window_visible = 1;
+    }
+}
+
+void tachometer_window::set_van_handle(psa_van_receiver *van_handle)
+{
+        this->van_receiver = van_handle;
+}
+
+void tachometer_window::send_trip_reset_a()
+{
+    psa_trip_reset_data_t reset_data = {.trip_meter = PSA_TRIP_A};
+    if(this->van_receiver != NULL)
+    {
+        this->van_receiver->send_trip_reset(reset_data);
+    }
+}
+
+void tachometer_window::send_trip_reset_b()
+{
+    psa_trip_reset_data_t reset_data = {.trip_meter = PSA_TRIP_B};
+    if(this->van_receiver != NULL)
+    {
+        this->van_receiver->send_trip_reset(reset_data);
+    }
 }
 
 void tachometer_window::receive_engine_data(psa_engine_data_t engine_data)
@@ -119,6 +165,57 @@ void tachometer_window::receive_dash_data(psa_dash_data_t dash_data)
     {
         this->ui->mileage_label->setText(QString::asprintf("%8.1f", (float)dash_data.mileage / 10.f));
         old_mileage = dash_data.mileage;
+    }
+}
+
+void tachometer_window::receive_trip_data(psa_trip_data_t trip_data)
+{
+    if(trip_data.trip_1_fuel_consumption != 0xffff)
+    {
+        this->ui->avg_fuel_a_label->setText(QString::asprintf("%.1f", (double)trip_data.trip_1_fuel_consumption / 10));
+    }
+    else{
+        this->ui->avg_fuel_a_label->setText("---");
+    }
+
+    if(trip_data.trip_2_fuel_consumption != 0xffff)
+    {
+        this->ui->avg_fuel_b_label->setText(QString::asprintf("%.1f", (double)trip_data.trip_2_fuel_consumption / 10));
+    }
+    else{
+        this->ui->avg_fuel_b_label->setText("---");
+    }
+
+    if(trip_data.trip_1_distance != 0xffff)
+    {
+        this->ui->distance_a_label->setText(QString::asprintf("%d", trip_data.trip_1_distance));
+    }
+    else{
+        this->ui->distance_a_label->setText("---");
+    }
+
+    if(trip_data.trip_2_distance != 0xffff)
+    {
+        this->ui->distance_b_label->setText(QString::asprintf("%d", trip_data.trip_2_distance));
+    }
+    else{
+        this->ui->distance_b_label->setText("---");
+    }
+
+    if(trip_data.trip_1_speed != 0xff)
+    {
+        this->ui->avg_speed_a_label->setText(QString::asprintf("%d", trip_data.trip_1_speed));
+    }
+    else{
+        this->ui->avg_speed_a_label->setText("---");
+    }
+
+    if(trip_data.trip_2_speed != 0xff)
+    {
+        this->ui->avg_speed_b_label->setText(QString::asprintf("%d", trip_data.trip_2_speed));
+    }
+    else{
+        this->ui->avg_speed_b_label->setText("---");
     }
 }
 

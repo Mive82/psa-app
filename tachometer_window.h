@@ -22,10 +22,18 @@ public:
     void change_tacho_angle(int rpm);
     void update_display();
     void change_speed(int speed);
+    void set_van_handle(psa_van_receiver* van_handle);
 
 public slots:
     void receive_engine_data(psa_engine_data_t engine_data);
     void receive_dash_data(psa_dash_data_t dash_data);
+    void receive_trip_data(psa_trip_data_t trip_data);
+    void toggle_trip_visibility();
+
+
+    void send_trip_reset_a();
+    void send_trip_reset_b();
+
 private:
     Ui::tachometer_window *ui;
 
@@ -34,6 +42,9 @@ private:
     psa_van_receiver *van_handle;
     QOpenGLWidget* widget;
     int speed_x, speed_y;
+    psa_van_receiver *van_receiver = NULL;
+
+    int window_visible = 0;
 
 };
 

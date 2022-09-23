@@ -83,6 +83,9 @@ extern "C"
     enum psa_status psa_set_cd_changer_data(
         PSA_IN struct psa_cd_changer_data const *const cdc_data);
 
+    enum psa_status psa_set_send_trip_reset(
+        PSA_IN struct psa_trip_reset_data const *const trip_reset);
+
 #ifdef __cplusplus
 } // extern "C"
 #endif // __cplusplus

@@ -108,7 +108,7 @@ psa_main_window::psa_main_window(QWidget *parent)
     this->van_handle->receive_cd_player_packets(true, 300);
     this->van_handle->receive_door_packets(true, 100);
     this->van_handle->receive_status_packet(true, 90);
-//    this->van_handle->receive_preset_packet();
+    this->van_handle->receive_preset_packet();
     QObject::connect(this->van_handle, &psa_van_receiver::radio_data_changed, this->ui->radio_widget, &psa_radio_window::receive_radio_data);
     QObject::connect(this->van_handle, &psa_van_receiver::engine_data_changed, this->ui->rpm_widget, &tachometer_window::receive_engine_data);
     QObject::connect(this->van_handle, &psa_van_receiver::headunit_data_changed, this->ui->radio_widget, &psa_radio_window::receive_headunit_data);
@@ -116,6 +116,8 @@ psa_main_window::psa_main_window(QWidget *parent)
     QObject::connect(this->van_handle, &psa_van_receiver::cd_player_data_changed, this->ui->radio_widget, &psa_radio_window::receive_cd_player_data);
     QObject::connect(this->van_handle, &psa_van_receiver::dash_data_changed, this->ui->rpm_widget, &tachometer_window::receive_dash_data);
     QObject::connect(this->van_handle, &psa_van_receiver::preset_data_changed, this->ui->radio_widget, &psa_radio_window::receive_presets_data);
+    QObject::connect(this->van_handle, &psa_van_receiver::trip_data_changed, this->ui->rpm_widget, &tachometer_window::receive_trip_data);
+
 
     QObject::connect(this->van_handle, &psa_van_receiver::engine_data_changed, this, &psa_main_window::parse_engine_data);
     QObject::connect(this->van_handle, &psa_van_receiver::radio_data_changed, this, &psa_main_window::parse_radio_data);
@@ -131,7 +133,7 @@ psa_main_window::psa_main_window(QWidget *parent)
     QObject::connect(ui->radio_button, &QPushButton::clicked, this, &psa_main_window::select_window_radio);
     QObject::connect(ui->music_button, &QPushButton::clicked, this, &psa_main_window::select_window_music);
     QObject::connect(ui->info_button, &QPushButton::clicked, this, &psa_main_window::select_window_info);
-    QObject::connect(ui->badapple_button, &QPushButton::clicked, this, &psa_main_window::select_window_badapple);
+    QObject::connect(ui->android_auto_button, &QPushButton::clicked, this, &psa_main_window::select_window_badapple);
 
     QObject::connect(ui->verticalSlider, &QSlider::valueChanged, ui->rpm_widget, &tachometer_window::change_tacho_angle);
     QObject::connect(ui->speed_slider, &QSlider::valueChanged, ui->rpm_widget, &tachometer_window::change_speed);
@@ -139,7 +141,7 @@ psa_main_window::psa_main_window(QWidget *parent)
     QObject::connect(this->volume_box_timer, &QTimer::timeout, this, &psa_main_window::hide_volume_screen);
 
     this->ui->music_widget->set_van_handle(this->van_handle);
-
+    this->ui->rpm_widget->set_van_handle(this->van_handle);
     //QObject::connect(this->screen_refresh_timer, &QTimer::timeout ,this, &psa_main_window::update_clock_display);
     //screen_refresh_timer->start(1000);
     //update_clock_display();
@@ -190,7 +192,7 @@ void psa_main_window::display_selected_window()
             ui->music_button->setChecked(false);
             ui->info_button->setChecked(false);
             ui->rpm_widget->setVisible(false);
-            ui->badapple_button->setVisible(true);
+            //ui->badapple_button->setVisible(true);
             ui->music_widget->setVisible(false);
             ui->radio_widget->setVisible(true);
             ui->badapple_widget->hide();
@@ -213,7 +215,7 @@ void psa_main_window::display_selected_window()
             ui->radio_button->setChecked(false);
             ui->music_button->setChecked(true);
             ui->info_button->setChecked(false);
-            ui->badapple_button->setVisible(true);
+            //ui->badapple_button->setVisible(true);
             ui->rpm_widget->setVisible(false);
             ui->music_widget->setVisible(true);
             ui->radio_widget->setVisible(false);
@@ -230,7 +232,7 @@ void psa_main_window::display_selected_window()
             ui->radio_button->setChecked(false);
             ui->music_button->setChecked(false);
             ui->info_button->setChecked(true);
-            ui->badapple_button->setVisible(true);
+            //ui->badapple_button->setVisible(true);
             ui->rpm_widget->setVisible(true);
             ui->music_widget->setVisible(false);
             ui->radio_widget->setVisible(false);
@@ -781,7 +783,7 @@ void psa_main_window::select_window_badapple()
 
     screen_pixmap.save("screen.png");
 
-    //    this->new_selected_window = PSA_WINDOW_BADAPPLE;
+//    this->new_selected_window = PSA_WINDOW_BADAPPLE;
 //    this->ui->music_widget->pause_player();
 //    display_selected_window();
     return;

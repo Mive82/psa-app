@@ -598,6 +598,20 @@ void psa_van_receiver::send_cdc_data(psa_cd_changer_data_t cdc_data)
     return;
 }
 
+void psa_van_receiver::queue_trip_reset_async(psa_trip_reset_data_t trip_data)
+{
+    QMutexLocker locker(&mutex);
+    locker.relock();
+    psa_set_send_trip_reset(&trip_data);
+    locker.unlock();
+}
+
+void psa_van_receiver::send_trip_reset(psa_trip_reset_data_t trip_reset)
+{
+    QtConcurrent::run(this, &psa_van_receiver::queue_trip_reset_async, trip_reset);
+    return;
+}
+
 psa_van_receiver::~psa_van_receiver()
 {
     if(this->engine_data)
