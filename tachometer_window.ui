@@ -113,8 +113,8 @@
   <widget class="QLabel" name="temp_icon">
    <property name="geometry">
     <rect>
-     <x>20</x>
-     <y>320</y>
+     <x>726</x>
+     <y>260</y>
      <width>50</width>
      <height>50</height>
     </rect>
@@ -132,8 +132,8 @@
   <widget class="QLabel" name="temp_label">
    <property name="geometry">
     <rect>
-     <x>70</x>
-     <y>324</y>
+     <x>600</x>
+     <y>264</y>
      <width>131</width>
      <height>41</height>
     </rect>
@@ -215,8 +215,8 @@
   <widget class="QLabel" name="oil_temp_icon">
    <property name="geometry">
     <rect>
-     <x>20</x>
-     <y>266</y>
+     <x>730</x>
+     <y>206</y>
      <width>50</width>
      <height>50</height>
     </rect>
@@ -234,8 +234,8 @@
   <widget class="QLabel" name="oil_temp_label">
    <property name="geometry">
     <rect>
-     <x>70</x>
-     <y>270</y>
+     <x>600</x>
+     <y>210</y>
      <width>131</width>
      <height>41</height>
     </rect>
@@ -270,8 +270,8 @@
   <widget class="QSlider" name="gear_slider">
    <property name="geometry">
     <rect>
-     <x>70</x>
-     <y>70</y>
+     <x>570</x>
+     <y>160</y>
      <width>16</width>
      <height>160</height>
     </rect>
@@ -290,6 +290,574 @@
    </property>
    <property name="orientation">
     <enum>Qt::Vertical</enum>
+   </property>
+  </widget>
+  <widget class="QTabWidget" name="trip_widget">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>150</y>
+     <width>230</width>
+     <height>250</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>PSA Groupe HMI Sans CS</family>
+     <pointsize>16</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QTabWidget::pane{
+	border-radius: 20px;
+	background-color: rgb(38, 48, 52);
+}
+
+QTabWidget::tab-bar{
+	alignment: center;
+}
+
+QTabBar::tab{
+		border-top-left-radius: 5px;
+		border-top-right-radius: 5px;
+		min-height: 35px;
+		min-width: 80px;
+		background: rgb(85,85,85);
+		color: #989898;
+		/*background-color: rgb(38, 48, 52);*/
+}
+
+QTabBar::tab::selected{
+		background-color: rgb(38, 48, 52);
+		color: white;
+		/*background: rgb(85,85,85);*/
+}
+
+QTabBar::tab::!selected{
+		margin-top: 5px;
+}</string>
+   </property>
+   <property name="currentIndex">
+    <number>0</number>
+   </property>
+   <widget class="QWidget" name="trip_a_tab">
+    <property name="styleSheet">
+     <string notr="true">QWidget{
+	background-color: none;
+}</string>
+    </property>
+    <attribute name="title">
+     <string>A</string>
+    </attribute>
+    <widget class="QLabel" name="avg_fuel_a_label">
+     <property name="geometry">
+      <rect>
+       <x>90</x>
+       <y>20</y>
+       <width>61</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Dots All For Now JL</family>
+       <pointsize>19</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>5.7</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
+    </widget>
+    <widget class="QLabel" name="avg_speed_a_label">
+     <property name="geometry">
+      <rect>
+       <x>90</x>
+       <y>60</y>
+       <width>61</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Dots All For Now JL</family>
+       <pointsize>19</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>63</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
+    </widget>
+    <widget class="QLabel" name="distance_a_label">
+     <property name="geometry">
+      <rect>
+       <x>40</x>
+       <y>100</y>
+       <width>111</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Dots All For Now JL</family>
+       <pointsize>19</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>2370</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="reset_button_a">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>150</y>
+       <width>185</width>
+       <height>51</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>PSA Groupe HMI Sans CS</family>
+       <pointsize>22</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton {
+    border: none;
+	outline: none;
+	margin: 2px;
+	border-radius: 18px;
+	background-color: rgba(255, 255, 255, 0);
+
+	background-color: qlineargradient(spread:pad, x1:1, y1:1, x2:0, y2:0, stop:0 rgba(0, 0, 0, 0), stop:1 rgba(255, 0, 0, 255));
+
+}
+
+QPushButton:pressed {
+	margin: 5px;
+    border: none;
+	outline: none;
+}
+
+QPushButton:checked {	
+	margin: 2px;
+    border: none;
+	outline: none;
+	
+		background-color: qlineargradient(spread:pad, x1:1, y1:1, x2:0, y2:0, stop:0 rgba(0, 0, 0, 0), stop:1 rgba(0, 0, 255, 255));
+
+/*	background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.313, fy:0.226818, stop:0.197861 rgba(155, 155, 155, 255), stop:1 rgba(53, 53, 255, 255));*/
+	/*background-color: #2a53ff;*/
+}
+
+QPushButton:unchecked {
+	margin: 2px;
+    border: none;
+	outline: none;
+}
+
+QPushButton:selected{
+	margin: 2px;
+	border: none;
+	outline: none;
+}
+
+QPushButton:focus{
+	margin: 2px;
+	position: absolute;
+    border: none;
+	outline: none;
+	top: 0px;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+}
+QPushButton:hover{
+	margin: 2px;
+	position: absolute;
+    border: none;
+	outline: none;
+	top: 0px;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+}
+
+
+QPushButton:default {
+	position: absolute;
+    border-width: 0px;
+	outline: none;
+	top: 0px;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+}</string>
+     </property>
+     <property name="text">
+      <string>Reset</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="fuel_unit_label_a">
+     <property name="geometry">
+      <rect>
+       <x>150</x>
+       <y>30</y>
+       <width>71</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>PSA Groupe HMI Sans CS</family>
+       <pointsize>12</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>l/100km</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
+    </widget>
+    <widget class="QLabel" name="speed_unit_label_a">
+     <property name="geometry">
+      <rect>
+       <x>180</x>
+       <y>70</y>
+       <width>41</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>PSA Groupe HMI Sans CS</family>
+       <pointsize>12</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>km/h</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
+    </widget>
+    <widget class="QLabel" name="distance_unit_label_a">
+     <property name="geometry">
+      <rect>
+       <x>190</x>
+       <y>110</y>
+       <width>31</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>PSA Groupe HMI Sans CS</family>
+       <pointsize>12</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>km</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="trip_b_tab">
+    <attribute name="title">
+     <string>B</string>
+    </attribute>
+    <widget class="QLabel" name="distance_unit_label_b">
+     <property name="geometry">
+      <rect>
+       <x>190</x>
+       <y>110</y>
+       <width>31</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>PSA Groupe HMI Sans CS</family>
+       <pointsize>12</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>km</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
+    </widget>
+    <widget class="QLabel" name="avg_fuel_b_label">
+     <property name="geometry">
+      <rect>
+       <x>90</x>
+       <y>20</y>
+       <width>61</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Dots All For Now JL</family>
+       <pointsize>19</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>5.7</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
+    </widget>
+    <widget class="QLabel" name="fuel_unit_label_b">
+     <property name="geometry">
+      <rect>
+       <x>150</x>
+       <y>30</y>
+       <width>71</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>PSA Groupe HMI Sans CS</family>
+       <pointsize>12</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>l/100km</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="reset_button_b">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>150</y>
+       <width>185</width>
+       <height>51</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>PSA Groupe HMI Sans CS</family>
+       <pointsize>22</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton {
+    border: none;
+	outline: none;
+	margin: 2px;
+	border-radius: 18px;
+	background-color: rgba(255, 255, 255, 0);
+
+	background-color: qlineargradient(spread:pad, x1:1, y1:1, x2:0, y2:0, stop:0 rgba(0, 0, 0, 0), stop:1 rgba(255, 0, 0, 255));
+
+}
+
+QPushButton:pressed {
+	margin: 5px;
+    border: none;
+	outline: none;
+}
+
+QPushButton:checked {	
+	margin: 2px;
+    border: none;
+	outline: none;
+	
+		background-color: qlineargradient(spread:pad, x1:1, y1:1, x2:0, y2:0, stop:0 rgba(0, 0, 0, 0), stop:1 rgba(0, 0, 255, 255));
+
+/*	background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.313, fy:0.226818, stop:0.197861 rgba(155, 155, 155, 255), stop:1 rgba(53, 53, 255, 255));*/
+	/*background-color: #2a53ff;*/
+}
+
+QPushButton:unchecked {
+	margin: 2px;
+    border: none;
+	outline: none;
+}
+
+QPushButton:selected{
+	margin: 2px;
+	border: none;
+	outline: none;
+}
+
+QPushButton:focus{
+	margin: 2px;
+	position: absolute;
+    border: none;
+	outline: none;
+	top: 0px;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+}
+QPushButton:hover{
+	margin: 2px;
+	position: absolute;
+    border: none;
+	outline: none;
+	top: 0px;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+}
+
+
+QPushButton:default {
+	position: absolute;
+    border-width: 0px;
+	outline: none;
+	top: 0px;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+}</string>
+     </property>
+     <property name="text">
+      <string>Reset</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="avg_speed_b_label">
+     <property name="geometry">
+      <rect>
+       <x>90</x>
+       <y>60</y>
+       <width>61</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Dots All For Now JL</family>
+       <pointsize>19</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>63</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
+    </widget>
+    <widget class="QLabel" name="distance_b_label">
+     <property name="geometry">
+      <rect>
+       <x>40</x>
+       <y>100</y>
+       <width>111</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Dots All For Now JL</family>
+       <pointsize>19</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>2370</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
+    </widget>
+    <widget class="QLabel" name="speed_unit_label_b">
+     <property name="geometry">
+      <rect>
+       <x>180</x>
+       <y>70</y>
+       <width>41</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>PSA Groupe HMI Sans CS</family>
+       <pointsize>12</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>km/h</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
+    </widget>
+   </widget>
+  </widget>
+  <widget class="QPushButton" name="trip_show_button">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>90</y>
+     <width>50</width>
+     <height>50</height>
+    </rect>
+   </property>
+   <property name="autoFillBackground">
+    <bool>false</bool>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton {
+    border: none;
+    background-color: rgba(255, 255, 255, 0);
+	padding: 5px;
+}
+
+QPushButton:pressed {
+    background-color: rgba(255, 255, 255, 0);
+	
+}
+
+QPushButton:flat {
+    border: none; /* no border for a flat push button */
+}
+
+QPushButton:default {
+    border: none;
+}</string>
+   </property>
+   <property name="text">
+    <string notr="true"/>
+   </property>
+   <property name="icon">
+    <iconset resource="psa-resources.qrc">
+     <normaloff>:/symbols/icons/music-playlist-symbolic.svg</normaloff>
+     <normalon>:/symbols/icons/music-playlist-selected.svg</normalon>:/symbols/icons/music-playlist-symbolic.svg</iconset>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>40</width>
+     <height>40</height>
+    </size>
+   </property>
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>false</bool>
+   </property>
+   <property name="flat">
+    <bool>true</bool>
    </property>
   </widget>
  </widget>

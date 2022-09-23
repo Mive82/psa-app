@@ -299,7 +299,7 @@ QPushButton:default {
    <property name="geometry">
     <rect>
      <x>120</x>
-     <y>0</y>
+     <y>400</y>
      <width>680</width>
      <height>400</height>
     </rect>
@@ -1135,8 +1135,8 @@ QPushButton:default {
   <zorder>playlist_list</zorder>
  </widget>
  <resources>
-  <include location="demo-resources.qrc"/>
   <include location="psa-resources.qrc"/>
+  <include location="demo-resources.qrc"/>
  </resources>
  <connections/>
 </ui>

@@ -10,7 +10,7 @@
 #include <signal.h>
 
 //#define DEBUG
-//#define DEBUG_SET
+#define DEBUG_SET
 #define MSP_WAIT_TIME 3500
 
 #define MSP_SET_WAIT_TIME 3500
@@ -595,4 +595,18 @@ enum psa_status psa_set_cd_changer_data(
     }
 
     return psa_send_set_command(PSA_IDENT_SET_CD_CHANGER_DATA, (uint8_t *)cdc_data, sizeof(*cdc_data));
+}
+
+enum psa_status psa_set_send_trip_reset(
+    PSA_IN struct psa_trip_reset_data const *const trip_reset)
+{
+    if(valid_instance == 0 || trip_reset == NULL)
+    {
+        if(global_instance.verbose)
+        {
+            fprintf(stderr, "ERROR: psa_set_send_trip_reset() -> argument is NULL\n");
+        }
+    }
+
+    return psa_send_set_command(PSA_IDENT_SET_TRIP_RESET, (uint8_t *)trip_reset, sizeof(*trip_reset));
 }

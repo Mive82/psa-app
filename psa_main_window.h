@@ -118,6 +118,8 @@ public slots:
 
     void update_audio_settings(struct audio_settings_values_struct settings);
 
+    void handle_music_on_resume();
+
     void parse_engine_data(psa_engine_data_t engine_data);
     void parse_radio_data(psa_radio_data_t radio_data);
     void parse_trip_data(psa_trip_data_t trip_data);

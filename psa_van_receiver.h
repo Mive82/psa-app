@@ -107,6 +107,7 @@ private:
     void queue_preset_data_async();
 
     void queue_cdc_packet_async(psa_cd_changer_data_t cdc_data);
+    void queue_trip_reset_async(psa_trip_reset_data_t trip_data);
 
 
     bool receiving_engine_data = false;
@@ -148,6 +149,7 @@ public slots:
     void preset_data_received();
 
     void send_cdc_data(psa_cd_changer_data_t cdc_data);
+    void send_trip_reset(psa_trip_reset_data_t trip_reset);
 
 };
 
