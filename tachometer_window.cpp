@@ -18,9 +18,12 @@ tachometer_window::tachometer_window(QWidget *parent) :
 //    van_handle->receive_engine_packets();
 
 //    QObject::connect(this->van_handle, &psa_van_receiver::engine_data_changed, this, &tachometer_window::receive_new_data);
-
-
+//    QObject::connect(this->ui->rpm_slider, &QSlider::valueChanged, this, &tachometer_window::change_tacho_angle);
+//    connect(this->ui->gear_slider, &QSlider::valueChanged, this->tacho_handle, QOverload<int>::of(&tachometer::set_gear));
     scene = tacho_handle->get_scene();
+
+    this->ui->gear_slider->hide();
+    this->ui->rpm_slider->hide();
 
     speed_x = 0;
     speed_y = 0;
@@ -97,15 +100,15 @@ void tachometer_window::receive_engine_data(psa_engine_data_t engine_data)
         ui->temp_label->setText(QString::asprintf("%3d°C", engine_data.engine_temperature-40));
     }
 
-    if(engine_data.oil_temperature != 0 && engine_data.oil_temperature != 0xff)
-    {
-        ui->oil_temp_icon->show();
-        ui->oil_temp_label->show();
-        ui->oil_temp_label->setText(QString::asprintf("%3d°C", engine_data.oil_temperature - 40));
-    }else{
-        ui->oil_temp_icon->hide();
-        ui->oil_temp_label->hide();
-    }
+//    if(engine_data.oil_temperature != 0 && engine_data.oil_temperature != 0xff)
+//    {
+//        ui->oil_temp_icon->show();
+//        ui->oil_temp_label->show();
+//        ui->oil_temp_label->setText(QString::asprintf("%3d°C", engine_data.oil_temperature - 40));
+//    }else{
+//        ui->oil_temp_icon->hide();
+//        ui->oil_temp_label->hide();
+//    }
 
     ui->fuel_label->setText(QString::asprintf("%2d%%", engine_data.fuel_level));
 }

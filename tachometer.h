@@ -50,6 +50,8 @@ public:
 public slots:
     void update_display();
     void update_gear_display();
+    void set_gear(int gear);
+    void toggle_gear_up_display();
 
 private:
     int rpm;
@@ -73,6 +75,7 @@ private:
     QPixmap *tacho_bg;
     QPixmap *tacho_needle;
     QPixmap *tacho_numbers;
+    QPixmap *gear_up_icon;
 
     QFont *tacho_speed_font;
     QFont *tacho_gear_font;
@@ -80,6 +83,7 @@ private:
     QGraphicsPixmapItem *tacho_bg_item;
     QGraphicsPixmapItem *tacho_numbers_item;
     QGraphicsPixmapItem *tacho_needle_item;
+    QGraphicsPixmapItem *gear_up_icon_item;
     QGraphicsTextItem *tacho_speed_item;
     QGraphicsTextItem *tacho_speed_bg_item;
     QGraphicsTextItem *tacho_gear_item;
@@ -92,11 +96,17 @@ private:
     void create_tachometer_2(tacho_range_t range);
 
     void set_speed_text(int speed);
-
+    void update_gear_up(int rpm);
 
     enum tacho_gear old_gear = GEAR_R;
     enum tacho_gear new_gear = GEAR_R;
+
+    bool gear_up_visible = false;
+    int gear_up_state = 0;
+    bool gear_up_grace = false; // If true, disable gear_up
+
     QTimer *gear_timer;
+    QTimer *gear_up_blink_timer;
 };
 
 #endif // TACHOMETER_H

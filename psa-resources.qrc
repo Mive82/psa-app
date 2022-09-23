@@ -51,6 +51,7 @@
         <file>tacho/7k.png</file>
         <file>tacho/needle.png</file>
         <file>tacho/background.png</file>
+        <file>tacho/gear_up.svg</file>
     </qresource>
     <qresource prefix="/fonts">
         <file>fonts/dejavu_sans_mono.ttf</file>
