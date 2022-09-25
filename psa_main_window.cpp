@@ -27,7 +27,7 @@ static int last_brightness = 110;
 
 const static int low_brightness = 55;
 const static int mid_brightness = 120;
-const static int high_brightness = 190;
+const static int high_brightness = 180;
 
 const static int transition_start_evening = 17*3600;
 const static int transition_end_evening = 19.5 * 3600;
@@ -344,8 +344,10 @@ void psa_main_window::set_main_display_radio_station(QString radio_station)
 
 void psa_main_window::parse_engine_data(psa_engine_data_t engine_data)
 {
-    this->speed = engine_data.speed / 100;
-    update_right_text();
+    if(engine_data.speed != 0xffff){
+        this->speed = engine_data.speed / 100;
+        update_right_text();
+    }
 }
 
 void psa_main_window::parse_trip_data(psa_trip_data_t trip_data)
@@ -802,13 +804,13 @@ void psa_main_window::select_window_radio(bool checked)
 
 void psa_main_window::select_window_badapple()
 {
-    QPixmap screen_pixmap = screen()->grabWindow(0);
+//    QPixmap screen_pixmap = screen()->grabWindow(0);
 
-    screen_pixmap.save("screen.png");
+//    screen_pixmap.save("screen.png");
 
-//    this->new_selected_window = PSA_WINDOW_BADAPPLE;
-//    this->ui->music_widget->pause_player();
-//    display_selected_window();
+    this->new_selected_window = PSA_WINDOW_BADAPPLE;
+    this->ui->music_widget->pause_player();
+    display_selected_window();
     return;
 }
 
