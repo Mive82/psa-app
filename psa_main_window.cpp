@@ -378,6 +378,11 @@ void psa_main_window::brightness_adjustment_task()
 //        this->pi_helper->set_lcd_brightness(0);
         return;
     }
+    if(last_state != PSA_STATE_ENGINE_ON && last_brightness > mid_brightness)
+    {
+        this->pi_helper->set_lcd_brightness(mid_brightness);
+        return;
+    }
     if(clock_state == 0)
     {
         if(mid_brightness != last_brightness)
@@ -456,6 +461,12 @@ void psa_main_window::parse_headunit_data(psa_headunit_data_t headunit_data)
         {
             this->ui->music_widget->pause_player();
         }
+        else{
+            if(new_radio_source == PSA_RADIO_EXTERNAL || radio_source == PSA_RADIO_EXTERNAL)
+            {
+                this->ui->music_widget->resume_player();
+            }
+        }
     }
 
     if(new_radio_source != radio_source)
@@ -466,14 +477,14 @@ void psa_main_window::parse_headunit_data(psa_headunit_data_t headunit_data)
         case PSA_RADIO_TUNER:
         case PSA_RADIO_INTERNAL:
             this->ui->music_widget->pause_player();
-            if(this->selected_window == PSA_WINDOW_MUSIC)
+            if(this->selected_window == PSA_WINDOW_MUSIC || this->selected_window == PSA_WINDOW_BADAPPLE)
             {
                 this->new_selected_window = PSA_WINDOW_RADIO;
             }
             break;
         case PSA_RADIO_EXTERNAL:
             this->ui->music_widget->resume_player();
-            if(this->selected_window == PSA_WINDOW_RADIO)
+            if(this->selected_window == PSA_WINDOW_RADIO || this->selected_window == PSA_WINDOW_BADAPPLE)
             {
                 this->new_selected_window = PSA_WINDOW_MUSIC;
             }
@@ -622,17 +633,35 @@ void psa_main_window::parse_status_data(psa_status_data_t status_data)
         case PSA_STATE_UNKNOWN:
         default:
             this->ui->music_widget->stop_player();
+            this->pi_helper->set_lcd_brightness(0);
+            display_status = 0;
+            break;
         case PSA_STATE_CRANKING:
             this->pi_helper->set_lcd_brightness(0);
             display_status = 0;
             break;
         case PSA_STATE_ACCESSORY:
-        case PSA_STATE_ENGINE_ON:
         case PSA_STATE_IGNITION:
         case PSA_STATE_RADIO_ON:
             if(last_state <= PSA_STATE_CAR_OFF)
             {
                 this->ui->music_widget->refresh_root_music_directory();
+            }
+            else{
+                handle_music_on_resume();
+            }
+            if(last_brightness > mid_brightness)
+            this->pi_helper->set_lcd_brightness(mid_brightness);
+            display_status = 1;
+            break;
+        case PSA_STATE_ENGINE_ON:
+
+            if(last_state <= PSA_STATE_CAR_OFF)
+            {
+                this->ui->music_widget->refresh_root_music_directory();
+            }
+            else{
+                handle_music_on_resume();
             }
             this->pi_helper->set_lcd_brightness(last_brightness);
             display_status = 1;
@@ -658,7 +687,7 @@ void psa_main_window::parse_status_data(psa_status_data_t status_data)
             this->ui->music_widget->prev_track();
             break;
         case PSA_CD_CHANGER_COMM_PAUSE:
-            this->ui->music_widget->pause_player();
+            //this->ui->music_widget->pause_player();
             break;
         case PSA_CD_CHANGER_COMM_PLAY:
             this->ui->music_widget->resume_player();
