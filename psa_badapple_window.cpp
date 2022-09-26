@@ -17,7 +17,7 @@ psa_badapple_window::psa_badapple_window(QWidget *parent) :
 
 
     this->badapple_player->setMedia(QUrl("qrc:/memes/memes/badapple.mp4"));
-    this->badapple_player->setVolume(10);
+    this->badapple_player->setVolume(100);
 }
 
 void psa_badapple_window::start_playback()
