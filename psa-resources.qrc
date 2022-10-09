@@ -52,6 +52,32 @@
         <file>tacho/needle.png</file>
         <file>tacho/background.png</file>
         <file>tacho/gear_up.svg</file>
+        <file>ID7/background.png</file>
+        <file>ID7/labels_8k.png</file>
+        <file>ID7/labels_9k.png</file>
+        <file>ID7/needle.png</file>
+        <file>ID7/gears/gear_0.png</file>
+        <file>ID7/gears/gear_1.png</file>
+        <file>ID7/gears/gear_2.png</file>
+        <file>ID7/gears/gear_3.png</file>
+        <file>ID7/gears/gear_4.png</file>
+        <file>ID7/gears/gear_5.png</file>
+        <file>ID7/gears/gear_6.png</file>
+        <file>ID7/gears/gear_7.png</file>
+        <file>ID7/gears/gear_8.png</file>
+        <file>ID7/gears/gear_9.png</file>
+        <file>ID7/gears/gear_10.png</file>
+        <file>ID7/speed/speed_digits_0.png</file>
+        <file>ID7/speed/speed_digits_1.png</file>
+        <file>ID7/speed/speed_digits_2.png</file>
+        <file>ID7/speed/speed_digits_3.png</file>
+        <file>ID7/speed/speed_digits_4.png</file>
+        <file>ID7/speed/speed_digits_5.png</file>
+        <file>ID7/speed/speed_digits_6.png</file>
+        <file>ID7/speed/speed_digits_7.png</file>
+        <file>ID7/speed/speed_digits_8.png</file>
+        <file>ID7/speed/speed_digits_9.png</file>
+        <file>ID7/rev_light.png</file>
     </qresource>
     <qresource prefix="/fonts">
         <file>fonts/dejavu_sans_mono.ttf</file>

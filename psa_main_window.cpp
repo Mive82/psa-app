@@ -112,7 +112,7 @@ psa_main_window::psa_main_window(QWidget *parent)
     this->van_handle->receive_status_packet(true, 90);
     this->van_handle->receive_preset_packet();
     QObject::connect(this->van_handle, &psa_van_receiver::radio_data_changed, this->ui->radio_widget, &psa_radio_window::receive_radio_data);
-    QObject::connect(this->van_handle, &psa_van_receiver::engine_data_changed, this->ui->rpm_widget, &tachometer_window::receive_engine_data);
+//    QObject::connect(this->van_handle, &psa_van_receiver::engine_data_changed, this->ui->rpm_widget, &tachometer_window::receive_engine_data);
     QObject::connect(this->van_handle, &psa_van_receiver::headunit_data_changed, this->ui->radio_widget, &psa_radio_window::receive_headunit_data);
     QObject::connect(this->van_handle, &psa_van_receiver::time_data_changed, this->ui->radio_widget, &psa_radio_window::receive_time_data);
     QObject::connect(this->van_handle, &psa_van_receiver::cd_player_data_changed, this->ui->radio_widget, &psa_radio_window::receive_cd_player_data);
@@ -663,7 +663,7 @@ void psa_main_window::parse_status_data(psa_status_data_t status_data)
             else{
                 handle_music_on_resume();
             }
-            this->pi_helper->set_lcd_brightness(last_brightness);
+            this->brightness_adjustment_task();
             display_status = 1;
             break;
         }

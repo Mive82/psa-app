@@ -50,8 +50,8 @@ TRANSLATIONS += \
 CONFIG += lrelease
 CONFIG += embed_translations
 
-QMAKE_CFLAGS += -mthumb -mfpu=neon-vfpv4 -mfloat-abi=hard -mcpu=cortex-a7
-QMAKE_CXXFLAGS += -mthumb -mfpu=neon-vfpv4 -mfloat-abi=hard -mcpu=cortex-a7
+#QMAKE_CFLAGS += -mthumb -mfpu=neon-vfpv4 -mfloat-abi=hard -mcpu=cortex-a7
+#QMAKE_CXXFLAGS += -mthumb -mfpu=neon-vfpv4 -mfloat-abi=hard -mcpu=cortex-a7
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

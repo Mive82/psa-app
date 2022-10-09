@@ -12,14 +12,16 @@ tachometer_window::tachometer_window(QWidget *parent) :
     ui(new Ui::tachometer_window)
 {
     ui->setupUi(this);
-    tacho_handle = new tachometer(PSA_TACHO_7K, this);
-    tacho_handle->set_scale(0.5);
+    tacho_handle = new tachometer(PSA_TACHO_7K_ID7, this);
+//    tacho_handle->set_scale(0.85);
 //    van_handle = new psa_van_receiver();
 //    van_handle->receive_engine_packets();
 
 //    QObject::connect(this->van_handle, &psa_van_receiver::engine_data_changed, this, &tachometer_window::receive_new_data);
-//    QObject::connect(this->ui->rpm_slider, &QSlider::valueChanged, this, &tachometer_window::change_tacho_angle);
-//    connect(this->ui->gear_slider, &QSlider::valueChanged, this->tacho_handle, QOverload<int>::of(&tachometer::set_gear));
+    QObject::connect(this->ui->rpm_slider, &QSlider::valueChanged, this, &tachometer_window::change_tacho_angle);
+    QObject::connect(this->ui->speed_slider, &QSlider::valueChanged, this, &tachometer_window::change_speed);
+
+    connect(this->ui->gear_slider, &QSlider::valueChanged, this->tacho_handle, QOverload<int>::of(&tachometer::set_gear));
 
     connect(this->ui->reset_button_a, &QPushButton::clicked, this, &tachometer_window::send_trip_reset_a);
     connect(this->ui->reset_button_b, &QPushButton::clicked, this, &tachometer_window::send_trip_reset_b);
@@ -31,8 +33,8 @@ tachometer_window::tachometer_window(QWidget *parent) :
 
     scene = tacho_handle->get_scene();
 
-    this->ui->gear_slider->hide();
-    this->ui->rpm_slider->hide();
+    this->ui->gear_slider->show();
+    this->ui->rpm_slider->show();
 
     speed_x = 0;
     speed_y = 0;
@@ -55,6 +57,11 @@ tachometer_window::tachometer_window(QWidget *parent) :
     //ui->tachometer->setForegroundBrush(QBrush(Qt::transparent));
 }
 
+
+void tachometer_window::set_rpm_text_debug(int rpm)
+{
+    this->ui->mileage_label->setText(QString::asprintf("%d", rpm));
+}
 
 void tachometer_window::toggle_trip_visibility()
 {
@@ -223,6 +230,7 @@ void tachometer_window::change_tacho_angle(int rpm)
 {
     //ui->rpm_label->setText(QString::asprintf("RPM: %4d", rpm));
     //ui->y_label->setText(QString::asprintf("X: %3d", rpm));
+    set_rpm_text_debug(rpm);
     tacho_handle->set_rpm(rpm);
 //    speed_y = rpm;
 //    tacho_handle->set_speed_pos(speed_x, speed_y);

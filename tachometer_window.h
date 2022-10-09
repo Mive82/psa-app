@@ -31,6 +31,8 @@ public slots:
     void toggle_trip_visibility();
 
 
+    void set_rpm_text_debug(int rpm);
+
     void send_trip_reset_a();
     void send_trip_reset_b();
 

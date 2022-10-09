@@ -9,9 +9,13 @@
 
 typedef enum tacho_range
 {
-    PSA_TACHO_7K = 0,
-    PSA_TACHO_8K = 1,
-
+    PSA_TACHO_7K_DEFAULT = 0,
+    PSA_TACHO_7K_ID7,
+    PSA_TACHO_7K_ID6,
+    PSA_TACHO_7K_ID5,
+    PSA_TACHO_7K_ID4,
+    PSA_TACHO_7K_ID3,
+    PSA_TACHO_8K_DEFAULT,
 } tacho_range_t;
 
 typedef enum tacho_gear{
@@ -58,7 +62,6 @@ private:
     float rpm_angle;
     float speed; // 328, 290
     QString speed_text;
-
     tacho_range_t set_range;
 
     int tacho_img_width;
@@ -67,15 +70,26 @@ private:
     int tacho_needle_offset_x;
     int tacho_needle_offset_y;
 
+    int tacho_needle_rotation_center_x;
+    int tacho_needle_rotation_center_y;
+
     int tacho_numbers_offset_x;
     int tacho_numbers_offset_y;
 
     float tacho_scale;
 
+    float start_angle;
+    float end_angle;
+
+    int tacho_redline;
+
     QPixmap *tacho_bg;
     QPixmap *tacho_needle;
     QPixmap *tacho_numbers;
     QPixmap *gear_up_icon;
+
+    QVector<QPixmap> tacho_speed_pixmap_font;
+    QVector<QPixmap> tacho_gear_pixmap_font;
 
     QFont *tacho_speed_font;
     QFont *tacho_gear_font;
@@ -84,6 +98,11 @@ private:
     QGraphicsPixmapItem *tacho_numbers_item;
     QGraphicsPixmapItem *tacho_needle_item;
     QGraphicsPixmapItem *gear_up_icon_item;
+    QGraphicsPixmapItem *tacho_gear_item_pixmap;
+    QGraphicsPixmapItem *tacho_speed_item_1_pixmap;
+    QGraphicsPixmapItem *tacho_speed_item_10_pixmap;
+    QGraphicsPixmapItem *tacho_speed_item_100_pixmap;
+
     QGraphicsTextItem *tacho_speed_item;
     QGraphicsTextItem *tacho_speed_bg_item;
     QGraphicsTextItem *tacho_gear_item;
@@ -93,7 +112,8 @@ private:
 
     float get_angle_from_rpm();
     void create_tachometer(tacho_range_t range);
-    void create_tachometer_2(tacho_range_t range);
+    void create_tachometer_default_7k();
+    void create_tachometer_id7_7k();
 
     void set_speed_text(int speed);
     void update_gear_up(int rpm);
